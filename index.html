@@ -142,12 +142,13 @@ const FORMS = [
 const FORM_IMAGES = window.FORM_IMAGES || {};
 const MIN_FABRIC_PRICE = 41;
 const FABRIC_BASE_DISCOUNT = 4;
+const FOLDABLE_FORM_SURCHARGE = 20;
 const FABRICS = (window.FABRIC_DATA || []).map(fabric => ({
   ...fabric,
   p: Math.max(0, Number(fabric?.p || 0) - FABRIC_BASE_DISCOUNT),
 }));
-const FORM_IMAGE_BASE_URL = (window.FORM_IMAGE_BASE_URL || "https://raw.githubusercontent.com/PolsterKonf/polster24-konfigurator/refs/heads/main/forms").replace(/\/+$/,"");
-const FABRIC_IMAGE_BASE_URL = (window.FABRIC_IMAGE_BASE_URL || "https://raw.githubusercontent.com/PolsterKonf/polster24-konfigurator/refs/heads/main/fabrics").replace(/\/+$/,"");
+const FORM_IMAGE_BASE_URL = (window.FORM_IMAGE_BASE_URL || "https://liberiparadisia.github.io/Konfi/forms").replace(/\/+$/,"");
+const FABRIC_IMAGE_BASE_URL = (window.FABRIC_IMAGE_BASE_URL || "https://liberiparadisia.github.io/Konfi/fabrics").replace(/\/+$/,"");
 
 const getFormImageCandidates = (formId) => {
   if (!formId) return [];
@@ -595,6 +596,13 @@ function App() {
   const cf   = FORMS.find(f=>f.id===formId)||FORMS[0];
   const foam = FOAM_TYPES[foamKey];
   const fab  = FABRICS.find(f=>f.id===fabric);
+  const hasFoam = foamKey !== "none";
+
+  useEffect(()=>{
+    if (!hasFoam && (extras.watt || extras.trik)) {
+      setExtras(current => ({...current, watt:false, trik:false}));
+    }
+  },[hasFoam, extras.watt, extras.trik]);
 
   const prices = useMemo(()=>{
     const { surface, volume } = calculateMetrics(cf, dims);
@@ -604,11 +612,12 @@ function App() {
     const foamCost = foam.density>0 ? Math.round(cf.foamFactor*FOAM_PRICE_PER_KG*foam.density*volume*100)/100 : 0;
     const jerseyCost  = extras.trik ? Math.round(4*surface*100)/100 : 0;
     const waddingCost = extras.watt ? Math.round(8*surface*100)/100 : 0;
+    const formSurcharge = (cf.id==="9" || cf.id==="22") ? FOLDABLE_FORM_SURCHARGE : 0;
     const otherExtras = EXTRAS
       .filter(e=>e.id!=="watt"&&e.id!=="trik"&&extras[e.id])
       .reduce((s,e)=>s+(e.perM2 ? Math.round(e.price*surface*100)/100 : e.price),0);
-    const total = fabricCost+foamCost+jerseyCost+waddingCost+otherExtras;
-    return {fabric:fabricCost,foam:foamCost,jersey:jerseyCost,wadding:waddingCost,
+    const total = fabricCost+foamCost+jerseyCost+waddingCost+otherExtras+formSurcharge;
+    return {fabric:fabricCost,foam:foamCost,jersey:jerseyCost,wadding:waddingCost,formSurcharge,
       extras:otherExtras,total:Math.round(total*100)/100,
       surface:Math.round(surface*1000)/1000,
       volume:Math.round(volume*1000000)/10};
@@ -905,25 +914,32 @@ function App() {
           sub:"Alle Extras sind optional. Preise werden live berechnet."}),
         React.createElement('div',{style:{display:"grid",gridTemplateColumns:"1fr",gap:1,
           background:"rgba(0,0,0,.05)",marginBottom:"1.5rem",borderRadius:4,overflow:"hidden"}},
-          EXTRAS.map(e=>React.createElement('div',{key:e.id,
-            onClick:()=>setExtras(x=>({...x,[e.id]:!x[e.id]})),
-            style:{background:extras[e.id]?C.linen2:C.chalk,padding:"0.9rem 1.2rem",cursor:"pointer",
-              border:`2px solid ${extras[e.id]?C.sand:"transparent"}`,transition:"all .2s",
-              display:"flex",alignItems:"center",gap:12}},
-            React.createElement('div',{style:{width:18,height:18,border:`1.5px solid ${extras[e.id]?C.sand:C.mid}`,
-              borderRadius:2,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,
-              background:extras[e.id]?C.sand:"transparent"}},
-              extras[e.id]&&React.createElement('span',{style:{fontSize:11,color:C.bark,fontWeight:700}},"✓")
-            ),
-            React.createElement('span',{style:{fontSize:18}},),
-            React.createElement('div',{style:{flex:1}},
-              React.createElement('div',{style:{fontSize:13,fontWeight:500,color:C.bark}},e.label),
-              React.createElement('div',{style:{fontSize:11,color:C.mid,marginTop:2}},e.desc)
-            ),
-            React.createElement('div',{style:{fontSize:13,color:extras[e.id]?C.sand:C.mid,fontWeight:extras[e.id]?600:300}},
-              e.price===0?"inkl.":e.perM2?`+${fmt(e.price)}/m²`:`+${fmt(e.price)}`
-            )
-          ))
+          EXTRAS.map(e=>{
+            const requiresFoam = e.id==="watt" || e.id==="trik";
+            const disabled = requiresFoam && !hasFoam;
+            const active = extras[e.id] && !disabled;
+            return React.createElement('div',{key:e.id,
+              onClick:disabled?undefined:()=>setExtras(x=>({...x,[e.id]:!x[e.id]})),
+              style:{background:active?C.linen2:C.chalk,padding:"0.9rem 1.2rem",cursor:disabled?"not-allowed":"pointer",
+                border:`2px solid ${active?C.sand:"transparent"}`,transition:"all .2s",
+                opacity:disabled?0.55:1,
+                display:"flex",alignItems:"center",gap:12}},
+              React.createElement('div',{style:{width:18,height:18,border:`1.5px solid ${active?C.sand:C.mid}`,
+                borderRadius:2,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,
+                background:active?C.sand:"transparent"}},
+                active&&React.createElement('span',{style:{fontSize:11,color:C.bark,fontWeight:700}},"✓")
+              ),
+              React.createElement('span',{style:{fontSize:18}},),
+              React.createElement('div',{style:{flex:1}},
+                React.createElement('div',{style:{fontSize:13,fontWeight:500,color:C.bark}},e.label),
+                React.createElement('div',{style:{fontSize:11,color:C.mid,marginTop:2}},
+                  disabled ? "Nur verfügbar, wenn Schaumstoff ausgewählt ist." : e.desc)
+              ),
+              React.createElement('div',{style:{fontSize:13,color:active?C.sand:C.mid,fontWeight:active?600:300}},
+                e.price===0?"inkl.":e.perM2?`+${fmt(e.price)}/m²`:`+${fmt(e.price)}`
+              )
+            );
+          })
         )
       );
 
