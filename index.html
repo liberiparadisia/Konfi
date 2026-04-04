@@ -171,9 +171,17 @@ const probeImageUrl = (url) => new Promise((resolve) => {
   img.src = url;
 });
 
+const toAbsoluteUrl = (url) => {
+  try {
+    return new URL(url, window.location.href).href;
+  } catch (e) {
+    return url || "";
+  }
+};
+
 const resolveFirstWorkingImage = async (candidates) => {
   for (const url of candidates) {
-    if (await probeImageUrl(url)) return url;
+    if (await probeImageUrl(url)) return toAbsoluteUrl(url);
   }
   return "";
 };
