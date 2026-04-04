@@ -580,6 +580,15 @@ function App() {
       try { msg = typeof event.data==="string"?JSON.parse(event.data):event.data; } catch(e){ return; }
       if(msg?.type==="POLSTER24_CART_SUCCESS"){
         setCartLoading(false);setCartError(null);setSuccess(true);
+        try {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        } catch (e) {
+          window.scrollTo(0, 0);
+        }
+        try {
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+        } catch (e) {}
       }
       if(msg?.type==="POLSTER24_CART_ERROR"){
         setCartError(msg.error||"Fehler beim Hinzufügen zum Warenkorb.");setCartLoading(false);
@@ -1075,7 +1084,7 @@ function App() {
           }},
             React.createElement('div',{style:{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.sand,marginBottom:"0.6rem"}},"Individuelle Hinweise"),
             React.createElement('div',{style:{fontSize:12,color:C.mid,lineHeight:1.6,marginBottom:"0.75rem"}},
-              "Hier kann der Kunde besondere Wünsche, Einbausituationen oder Zusatzinfos angeben."
+              "Teile uns hier gern besondere Wünsche oder wichtige Hinweise zu deiner Bestellung mit."
             ),
             React.createElement('textarea',{
               value:order.note || "",
