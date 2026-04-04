@@ -1,0 +1,1252 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>LP-Polster | Konfigurator für Polster nach Maß</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<script>
+window.FORM_IMAGES = {};
+// Fabric data from Excel/CSV
+window.FABRIC_DATA = [{"id":"calima_1","n":"Calima 1","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_3","n":"Calima 3","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_6","n":"Calima 6","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_8","n":"Calima 8","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_9","n":"Calima 9","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_11","n":"Calima 11","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_12","n":"Calima 12","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_15","n":"Calima 15","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_16","n":"Calima 16","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_17","n":"Calima 17","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_19","n":"Calima 19","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_23","n":"Calima 23","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_24","n":"Calima 24","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_25","n":"Calima 25","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_30","n":"Calima 30","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_31","n":"Calima 31","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_32","n":"Calima 32","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_33","n":"Calima 33","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_34","n":"Calima 34","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_35","n":"Calima 35","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_36","n":"Calima 36","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_41","n":"Calima 41","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"calima_42","n":"Calima 42","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"300 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"\u003e 100 000 Zycklen"}},{"id":"agora_marino","n":"Agora® Marino","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"315 g/m² ± 5%","Breite":"140 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_alabastro","n":"Agora® Alabastro","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"316 g/m² ± 5%","Breite":"141 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_antracita","n":"Agora® Antracita","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"317 g/m² ± 5%","Breite":"142 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_avena","n":"Agora® Avena","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"318 g/m² ± 5%","Breite":"143 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_basalto","n":"Agora® Basalto","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"319 g/m² ± 5%","Breite":"144 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_blanco","n":"Agora® Blanco","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"320 g/m² ± 5%","Breite":"145 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_brisa","n":"Agora® Brisa","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"321 g/m² ± 5%","Breite":"146 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_brasserie","n":"Agora® Brasserie","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"322 g/m² ± 5%","Breite":"147 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_botella","n":"Agora® Botella","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"323 g/m² ± 5%","Breite":"148 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_grafito","n":"Agora® Grafito","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"324 g/m² ± 5%","Breite":"149 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_granate","n":"Agora® Granate","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"325 g/m² ± 5%","Breite":"150 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_indigo","n":"Agora® Indigo","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"326 g/m² ± 5%","Breite":"151 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_integral","n":"Agora® Integral","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"327 g/m² ± 5%","Breite":"152 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_marfil","n":"Agora® Marfil","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"328 g/m² ± 5%","Breite":"153 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_mineral","n":"Agora® Mineral","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"329 g/m² ± 5%","Breite":"154 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_negro","n":"Agora® Negro","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"330 g/m² ± 5%","Breite":"155 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_perla","n":"Agora® Perla","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"331 g/m² ± 5%","Breite":"156 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_piedra","n":"Agora® Piedra","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"332 g/m² ± 5%","Breite":"157 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_verde","n":"Agora® Verde","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"333 g/m² ± 5%","Breite":"158 cm± 2 cm","Lichtechtheit":"7"}},{"id":"agora_turkis","n":"Agora® Turkis","cat":"outdoor","p":29.5,"props":{"Zusammensetzung":"100% Acrylfaser","Gewicht":"334 g/m² ± 5%","Breite":"159 cm± 2 cm","Lichtechtheit":"7"}},{"id":"soleo_1","n":"Soleo 1","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_2","n":"Soleo 2","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_3","n":"Soleo 3","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_4","n":"Soleo 4","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_5","n":"Soleo 5","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_6","n":"Soleo 6","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_7","n":"Soleo 7","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_8","n":"Soleo 8","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_9","n":"Soleo 9","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_10","n":"Soleo 10","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_11","n":"Soleo 11","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_12","n":"Soleo 12","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_13","n":"Soleo 13","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_14","n":"Soleo 14","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_15","n":"Soleo 15","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_16","n":"Soleo 16","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_17","n":"Soleo 17","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_18","n":"Soleo 18","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"soleo_19","n":"Soleo 19","cat":"indoor","p":23.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"380 g/m² ± 5%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"silvertex_macadamia","n":"Silvertex® Macadamia","cat":"nautic","p":44.0,"props":{"Zusammensetzung":"100 % Vinyl / Urethane","Gewicht":"685g/m²","Breite":"137cm","Scheuerfestigkeit":"\u003e100.000 Zyklen"}},{"id":"silvertex_mocca","n":"Silvertex® Mocca","cat":"nautic","p":44.0,"props":{"Zusammensetzung":"101 % Vinyl / Urethane","Gewicht":"685g/m131","Breite":"137cm","Scheuerfestigkeit":"\u003e100.000 Zyklen"}},{"id":"silvertex_beige","n":"Silvertex® Beige","cat":"nautic","p":44.0,"props":{"Zusammensetzung":"103 % Vinyl / Urethane","Gewicht":"685g/m133","Breite":"137cm","Scheuerfestigkeit":"\u003e100.000 Zyklen"}},{"id":"silvertex_sisal","n":"Silvertex® Sisal","cat":"nautic","p":44.0,"props":{"Zusammensetzung":"104 % Vinyl / Urethane","Gewicht":"685g/m134","Breite":"137cm","Scheuerfestigkeit":"\u003e100.000 Zyklen"}},{"id":"silvertex_cream","n":"Silvertex® Cream","cat":"nautic","p":44.0,"props":{"Zusammensetzung":"105 % Vinyl / Urethane","Gewicht":"685g/m135","Breite":"137cm","Scheuerfestigkeit":"\u003e100.000 Zyklen"}},{"id":"silvertex_red","n":"Silvertex® Red","cat":"nautic","p":44.0,"props":{"Zusammensetzung":"106 % Vinyl / Urethane","Gewicht":"685g/m136","Breite":"137cm","Scheuerfestigkeit":"\u003e100.000 Zyklen"}},{"id":"silvertex_rasberry","n":"Silvertex® Rasberry","cat":"nautic","p":44.0,"props":{"Zusammensetzung":"107 % Vinyl / Urethane","Gewicht":"685g/m137","Breite":"137cm","Scheuerfestigkeit":"\u003e100.000 Zyklen"}},{"id":"silvertex_saphire","n":"Silvertex® Saphire","cat":"nautic","p":44.0,"props":{"Zusammensetzung":"108 % Vinyl / Urethane","Gewicht":"685g/m138","Breite":"137cm","Scheuerfestigkeit":"\u003e100.000 Zyklen"}},{"id":"silvertex_plata","n":"Silvertex® Plata","cat":"nautic","p":44.0,"props":{"Zusammensetzung":"109 % Vinyl / Urethane","Gewicht":"685g/m139","Breite":"137cm","Scheuerfestigkeit":"\u003e100.000 Zyklen"}},{"id":"silvertex_storm","n":"Silvertex® Storm","cat":"nautic","p":44.0,"props":{"Zusammensetzung":"110 % Vinyl / Urethane","Gewicht":"685g/m140","Breite":"137cm","Scheuerfestigkeit":"\u003e100.000 Zyklen"}},{"id":"silvertex_ice","n":"Silvertex® Ice","cat":"nautic","p":44.0,"props":{"Zusammensetzung":"111 % Vinyl / Urethane","Gewicht":"685g/m141","Breite":"137cm","Scheuerfestigkeit":"\u003e100.000 Zyklen"}},{"id":"silvertex_meteor","n":"Silvertex® Meteor","cat":"nautic","p":44.0,"props":{"Zusammensetzung":"112 % Vinyl / Urethane","Gewicht":"685g/m142","Breite":"137cm","Scheuerfestigkeit":"\u003e100.000 Zyklen"}},{"id":"silvertex_pistacho","n":"Silvertex® Pistacho","cat":"nautic","p":44.0,"props":{"Zusammensetzung":"113 % Vinyl / Urethane","Gewicht":"685g/m143","Breite":"137cm","Scheuerfestigkeit":"\u003e100.000 Zyklen"}},{"id":"silvertex_basil","n":"Silvertex® Basil","cat":"nautic","p":44.0,"props":{"Zusammensetzung":"114 % Vinyl / Urethane","Gewicht":"685g/m144","Breite":"137cm","Scheuerfestigkeit":"\u003e100.000 Zyklen"}},{"id":"silvertex_mandarin","n":"Silvertex® Mandarin","cat":"nautic","p":44.0,"props":{"Zusammensetzung":"115 % Vinyl / Urethane","Gewicht":"685g/m145","Breite":"137cm","Scheuerfestigkeit":"\u003e100.000 Zyklen"}},{"id":"silvertex_melon","n":"Silvertex® Melon","cat":"nautic","p":44.0,"props":{"Zusammensetzung":"116 % Vinyl / Urethane","Gewicht":"685g/m146","Breite":"137cm","Scheuerfestigkeit":"\u003e100.000 Zyklen"}},{"id":"luma_1","n":"Luma 1","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"290 g/m² ± 5%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4 - 5","Scheuerfestigkeit":"\u003e 70 000 Zycklen"}},{"id":"luma_2","n":"Luma 2","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"290 g/m² ± 5%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4 - 5","Scheuerfestigkeit":"\u003e 70 000 Zycklen"}},{"id":"luma_3","n":"Luma 3","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"290 g/m² ± 5%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4 - 5","Scheuerfestigkeit":"\u003e 70 000 Zycklen"}},{"id":"luma_4","n":"Luma 4","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"290 g/m² ± 5%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4 - 5","Scheuerfestigkeit":"\u003e 70 000 Zycklen"}},{"id":"luma_5","n":"Luma 5","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"290 g/m² ± 5%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4 - 5","Scheuerfestigkeit":"\u003e 70 000 Zycklen"}},{"id":"luma_6","n":"Luma 6","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"290 g/m² ± 5%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4 - 5","Scheuerfestigkeit":"\u003e 70 000 Zycklen"}},{"id":"luma_7","n":"Luma 7","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"290 g/m² ± 5%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4 - 5","Scheuerfestigkeit":"\u003e 70 000 Zycklen"}},{"id":"luma_8","n":"Luma 8","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"290 g/m² ± 5%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4 - 5","Scheuerfestigkeit":"\u003e 70 000 Zycklen"}},{"id":"luma_10","n":"Luma 10","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"290 g/m² ± 5%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4 - 5","Scheuerfestigkeit":"\u003e 70 000 Zycklen"}},{"id":"luma_12","n":"Luma 12","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"290 g/m² ± 5%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4 - 5","Scheuerfestigkeit":"\u003e 70 000 Zycklen"}},{"id":"luma_13","n":"Luma 13","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"290 g/m² ± 5%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4 - 5","Scheuerfestigkeit":"\u003e 70 000 Zycklen"}},{"id":"luma_14","n":"Luma 14","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"290 g/m² ± 5%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4 - 5","Scheuerfestigkeit":"\u003e 70 000 Zycklen"}},{"id":"luma_15","n":"Luma 15","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"290 g/m² ± 5%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4 - 5","Scheuerfestigkeit":"\u003e 70 000 Zycklen"}},{"id":"luma_16","n":"Luma 16","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"290 g/m² ± 5%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4 - 5","Scheuerfestigkeit":"\u003e 70 000 Zycklen"}},{"id":"luma_17","n":"Luma 17","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"290 g/m² ± 5%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4 - 5","Scheuerfestigkeit":"\u003e 70 000 Zycklen"}},{"id":"luma_18","n":"Luma 18","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"290 g/m² ± 5%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4 - 5","Scheuerfestigkeit":"\u003e 70 000 Zycklen"}},{"id":"luma_19","n":"Luma 19","cat":"indoor","p":15.75,"props":{"Zusammensetzung":"100% PES","Gewicht":"290 g/m² ± 5%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4 - 5","Scheuerfestigkeit":"\u003e 70 000 Zycklen"}},{"id":"milo_1","n":"Milo 1","cat":"indoor","p":14.25,"props":{"Zusammensetzung":"92% poliester + 8% nylon","Gewicht":"220 g/m² ± 10%","Breite":"146 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"75 000 Zycklen"}},{"id":"milo_2","n":"Milo 2","cat":"indoor","p":14.25,"props":{"Zusammensetzung":"92% poliester + 8% nylon","Gewicht":"220 g/m² ± 10%","Breite":"146 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"75 000 Zycklen"}},{"id":"milo_3","n":"Milo 3","cat":"indoor","p":14.25,"props":{"Zusammensetzung":"92% poliester + 8% nylon","Gewicht":"220 g/m² ± 10%","Breite":"146 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"75 000 Zycklen"}},{"id":"milo_4","n":"Milo 4","cat":"indoor","p":14.25,"props":{"Zusammensetzung":"92% poliester + 8% nylon","Gewicht":"220 g/m² ± 10%","Breite":"146 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"75 000 Zycklen"}},{"id":"milo_5","n":"Milo 5","cat":"indoor","p":14.25,"props":{"Zusammensetzung":"92% poliester + 8% nylon","Gewicht":"220 g/m² ± 10%","Breite":"146 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"75 000 Zycklen"}},{"id":"milo_6","n":"Milo 6","cat":"indoor","p":14.25,"props":{"Zusammensetzung":"92% poliester + 8% nylon","Gewicht":"220 g/m² ± 10%","Breite":"146 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"75 000 Zycklen"}},{"id":"milo_8","n":"Milo 8","cat":"indoor","p":14.25,"props":{"Zusammensetzung":"92% poliester + 8% nylon","Gewicht":"220 g/m² ± 10%","Breite":"146 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"75 000 Zycklen"}},{"id":"milo_9","n":"Milo 9","cat":"indoor","p":14.25,"props":{"Zusammensetzung":"92% poliester + 8% nylon","Gewicht":"220 g/m² ± 10%","Breite":"146 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"75 000 Zycklen"}},{"id":"milo_10","n":"Milo 10","cat":"indoor","p":14.25,"props":{"Zusammensetzung":"92% poliester + 8% nylon","Gewicht":"220 g/m² ± 10%","Breite":"146 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"75 000 Zycklen"}},{"id":"milo_11","n":"Milo 11","cat":"indoor","p":14.25,"props":{"Zusammensetzung":"92% poliester + 8% nylon","Gewicht":"220 g/m² ± 10%","Breite":"146 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"75 000 Zycklen"}},{"id":"milo_12","n":"Milo 12","cat":"indoor","p":14.25,"props":{"Zusammensetzung":"92% poliester + 8% nylon","Gewicht":"220 g/m² ± 10%","Breite":"146 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"75 000 Zycklen"}},{"id":"milo_13","n":"Milo 13","cat":"indoor","p":14.25,"props":{"Zusammensetzung":"92% poliester + 8% nylon","Gewicht":"220 g/m² ± 10%","Breite":"146 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"75 000 Zycklen"}},{"id":"milo_14","n":"Milo 14","cat":"indoor","p":14.25,"props":{"Zusammensetzung":"92% poliester + 8% nylon","Gewicht":"220 g/m² ± 10%","Breite":"146 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"75 000 Zycklen"}},{"id":"milo_15","n":"Milo 15","cat":"indoor","p":14.25,"props":{"Zusammensetzung":"92% poliester + 8% nylon","Gewicht":"220 g/m² ± 10%","Breite":"146 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"75 000 Zycklen"}},{"id":"milo_16","n":"Milo 16","cat":"indoor","p":14.25,"props":{"Zusammensetzung":"92% poliester + 8% nylon","Gewicht":"220 g/m² ± 10%","Breite":"146 cm ± 2 cm","Lichtechtheit":"3-4","Scheuerfestigkeit":"75 000 Zycklen"}},{"id":"gaia_1","n":"Gaia 1","cat":"indoor","p":23.5,"props":{"Zusammensetzung":"Recycelte PET-Fasern","Gewicht":"370 g/m² ± 5%","Breite":"145 cm ± 2 cm","Lichtechtheit":"5-6","Scheuerfestigkeit":"67 000 Zycklen"}},{"id":"gaia_2","n":"Gaia 2","cat":"indoor","p":23.5,"props":{"Zusammensetzung":"Recycelte PET-Fasern","Gewicht":"370 g/m² ± 5%","Breite":"145 cm ± 2 cm","Lichtechtheit":"5-6","Scheuerfestigkeit":"67 000 Zycklen"}},{"id":"gaia_3","n":"Gaia 3","cat":"indoor","p":23.5,"props":{"Zusammensetzung":"Recycelte PET-Fasern","Gewicht":"370 g/m² ± 5%","Breite":"145 cm ± 2 cm","Lichtechtheit":"5-6","Scheuerfestigkeit":"67 000 Zycklen"}},{"id":"gaia_4","n":"Gaia 4","cat":"indoor","p":23.5,"props":{"Zusammensetzung":"Recycelte PET-Fasern","Gewicht":"370 g/m² ± 5%","Breite":"145 cm ± 2 cm","Lichtechtheit":"5-6","Scheuerfestigkeit":"67 000 Zycklen"}},{"id":"gaia_5","n":"Gaia 5","cat":"indoor","p":23.5,"props":{"Zusammensetzung":"Recycelte PET-Fasern","Gewicht":"370 g/m² ± 5%","Breite":"145 cm ± 2 cm","Lichtechtheit":"5-6","Scheuerfestigkeit":"67 000 Zycklen"}},{"id":"gaia_6","n":"Gaia 6","cat":"indoor","p":23.5,"props":{"Zusammensetzung":"Recycelte PET-Fasern","Gewicht":"370 g/m² ± 5%","Breite":"145 cm ± 2 cm","Lichtechtheit":"5-6","Scheuerfestigkeit":"67 000 Zycklen"}},{"id":"gaia_7","n":"Gaia 7","cat":"indoor","p":23.5,"props":{"Zusammensetzung":"Recycelte PET-Fasern","Gewicht":"370 g/m² ± 5%","Breite":"145 cm ± 2 cm","Lichtechtheit":"5-6","Scheuerfestigkeit":"67 000 Zycklen"}},{"id":"gaia_8","n":"Gaia 8","cat":"indoor","p":23.5,"props":{"Zusammensetzung":"Recycelte PET-Fasern","Gewicht":"370 g/m² ± 5%","Breite":"145 cm ± 2 cm","Lichtechtheit":"5-6","Scheuerfestigkeit":"67 000 Zycklen"}},{"id":"gaia_9","n":"Gaia 9","cat":"indoor","p":23.5,"props":{"Zusammensetzung":"Recycelte PET-Fasern","Gewicht":"370 g/m² ± 5%","Breite":"145 cm ± 2 cm","Lichtechtheit":"5-6","Scheuerfestigkeit":"67 000 Zycklen"}},{"id":"gaia_10","n":"Gaia 10","cat":"indoor","p":23.5,"props":{"Zusammensetzung":"Recycelte PET-Fasern","Gewicht":"370 g/m² ± 5%","Breite":"145 cm ± 2 cm","Lichtechtheit":"5-6","Scheuerfestigkeit":"67 000 Zycklen"}},{"id":"gaia_11","n":"Gaia 11","cat":"indoor","p":23.5,"props":{"Zusammensetzung":"Recycelte PET-Fasern","Gewicht":"370 g/m² ± 5%","Breite":"145 cm ± 2 cm","Lichtechtheit":"5-6","Scheuerfestigkeit":"67 000 Zycklen"}},{"id":"gaia_12","n":"Gaia 12","cat":"indoor","p":23.5,"props":{"Zusammensetzung":"Recycelte PET-Fasern","Gewicht":"370 g/m² ± 5%","Breite":"145 cm ± 2 cm","Lichtechtheit":"5-6","Scheuerfestigkeit":"67 000 Zycklen"}},{"id":"gaia_13","n":"Gaia 13","cat":"indoor","p":23.5,"props":{"Zusammensetzung":"Recycelte PET-Fasern","Gewicht":"370 g/m² ± 5%","Breite":"145 cm ± 2 cm","Lichtechtheit":"5-6","Scheuerfestigkeit":"67 000 Zycklen"}},{"id":"gaia_14","n":"Gaia 14","cat":"indoor","p":23.5,"props":{"Zusammensetzung":"Recycelte PET-Fasern","Gewicht":"370 g/m² ± 5%","Breite":"145 cm ± 2 cm","Lichtechtheit":"5-6","Scheuerfestigkeit":"67 000 Zycklen"}},{"id":"gaia_15","n":"Gaia 15","cat":"indoor","p":23.5,"props":{"Zusammensetzung":"Recycelte PET-Fasern","Gewicht":"370 g/m² ± 5%","Breite":"145 cm ± 2 cm","Lichtechtheit":"5-6","Scheuerfestigkeit":"67 000 Zycklen"}},{"id":"fero_1","n":"Fero 1","cat":"indoor","p":19.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"310 g/m² ± 5%","Breite":"142 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"30000 Zycklen"}},{"id":"fero_2","n":"Fero 2","cat":"indoor","p":19.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"310 g/m² ± 5%","Breite":"142 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"30000 Zycklen"}},{"id":"fero_3","n":"Fero 3","cat":"indoor","p":19.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"310 g/m² ± 5%","Breite":"142 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"30000 Zycklen"}},{"id":"fero_4","n":"Fero 4","cat":"indoor","p":19.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"310 g/m² ± 5%","Breite":"142 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"30000 Zycklen"}},{"id":"fero_5","n":"Fero 5","cat":"indoor","p":19.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"310 g/m² ± 5%","Breite":"142 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"30000 Zycklen"}},{"id":"fero_6","n":"Fero 6","cat":"indoor","p":19.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"310 g/m² ± 5%","Breite":"142 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"30000 Zycklen"}},{"id":"fero_7","n":"Fero 7","cat":"indoor","p":19.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"310 g/m² ± 5%","Breite":"142 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"30000 Zycklen"}},{"id":"fero_8","n":"Fero 8","cat":"indoor","p":19.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"310 g/m² ± 5%","Breite":"142 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"30000 Zycklen"}},{"id":"fero_10","n":"Fero 10","cat":"indoor","p":19.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"310 g/m² ± 5%","Breite":"142 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"30000 Zycklen"}},{"id":"fero_11","n":"Fero 11","cat":"indoor","p":19.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"310 g/m² ± 5%","Breite":"142 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"30000 Zycklen"}},{"id":"fero_12","n":"Fero 12","cat":"indoor","p":19.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"310 g/m² ± 5%","Breite":"142 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"30000 Zycklen"}},{"id":"fero_13","n":"Fero 13","cat":"indoor","p":19.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"310 g/m² ± 5%","Breite":"142 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"30000 Zycklen"}},{"id":"fero_14","n":"Fero 14","cat":"indoor","p":19.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"310 g/m² ± 5%","Breite":"142 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"30000 Zycklen"}},{"id":"malenia_9","n":"Malenia 9","cat":"indoor","p":14.5,"props":{"Zusammensetzung":"100% PES","Gewicht":"220 g/m² ± 10%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"58 000 Zycklen"}},{"id":"malenia_10","n":"Malenia 10","cat":"indoor","p":14.5,"props":{"Zusammensetzung":"100% PES","Gewicht":"220 g/m² ± 10%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"58 000 Zycklen"}},{"id":"malenia_11","n":"Malenia 11","cat":"indoor","p":14.5,"props":{"Zusammensetzung":"100% PES","Gewicht":"220 g/m² ± 10%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"58 000 Zycklen"}},{"id":"malenia_12","n":"Malenia 12","cat":"indoor","p":14.5,"props":{"Zusammensetzung":"100% PES","Gewicht":"220 g/m² ± 10%","Breite":"143 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"58 000 Zycklen"}},{"id":"vivo_1","n":"Vivo 1","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"vivo_3","n":"Vivo 3","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"vivo_4","n":"Vivo 4","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"vivo_6","n":"Vivo 6","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"vivo_8","n":"Vivo 8","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"vivo_9","n":"Vivo 9","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"vivo_10","n":"Vivo 10","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"vivo_11","n":"Vivo 11","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"vivo_12","n":"Vivo 12","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"vivo_13","n":"Vivo 13","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"vivo_14","n":"Vivo 14","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"vivo_16","n":"Vivo 16","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"vivo_17","n":"Vivo 17","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"vivo_30","n":"Vivo 30","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"vivo_32","n":"Vivo 32","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"vivo_33","n":"Vivo 33","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"vivo_34","n":"Vivo 34","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"vivo_36","n":"Vivo 36","cat":"indoor","p":18.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"270 g/m² ± 5%","Breite":"144 cm ± 2 cm","Lichtechtheit":"4-5","Scheuerfestigkeit":"81 000 Zycklen"}},{"id":"lex_2","n":"Lex 2","cat":"indoor","p":12.5,"props":{"Zusammensetzung":"100% PES","Gewicht":"230 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"lex_3","n":"Lex 3","cat":"indoor","p":12.5,"props":{"Zusammensetzung":"100% PES","Gewicht":"230 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"lex_4","n":"Lex 4","cat":"indoor","p":12.5,"props":{"Zusammensetzung":"100% PES","Gewicht":"230 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"lex_5","n":"Lex 5","cat":"indoor","p":12.5,"props":{"Zusammensetzung":"100% PES","Gewicht":"230 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"lex_6","n":"Lex 6","cat":"indoor","p":12.5,"props":{"Zusammensetzung":"100% PES","Gewicht":"230 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"lex_12","n":"Lex 12","cat":"indoor","p":12.5,"props":{"Zusammensetzung":"100% PES","Gewicht":"230 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"lex_19","n":"Lex 19","cat":"indoor","p":12.5,"props":{"Zusammensetzung":"100% PES","Gewicht":"230 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"lex_22","n":"Lex 22","cat":"indoor","p":12.5,"props":{"Zusammensetzung":"100% PES","Gewicht":"230 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"lex_26","n":"Lex 26","cat":"indoor","p":12.5,"props":{"Zusammensetzung":"100% PES","Gewicht":"230 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"lex_32","n":"Lex 32","cat":"indoor","p":12.5,"props":{"Zusammensetzung":"100% PES","Gewicht":"230 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"lex_33","n":"Lex 33","cat":"indoor","p":12.5,"props":{"Zusammensetzung":"100% PES","Gewicht":"230 g/m² ± 10%","Breite":"148 cm ± 2 cm","Lichtechtheit":"4","Scheuerfestigkeit":"\u003e100 000 Zycklen"}},{"id":"sleep_1_300g","n":"Sleep 1 300g","cat":"schlafen","p":34.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"300g/m²","Breite":"230cm ± 2 cm","Wattierung":"300g/m²"}},{"id":"sleep_2_150g","n":"Sleep 2 150g","cat":"schlafen","p":25.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"180g/m²","Breite":"230cm ± 2 cm","Wattierung":"150g/m²"}},{"id":"sleep_3_150g","n":"Sleep 3 150g","cat":"schlafen","p":25.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"180g/m²","Breite":"230cm ± 2 cm","Wattierung":"150g/m²"}},{"id":"sleep_4_150g","n":"Sleep 4 150g","cat":"schlafen","p":25.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"160g/m²","Breite":"230cm ± 2 cm","Wattierung":"150g/m²"}},{"id":"sleep_5_150g","n":"Sleep 5 150g","cat":"schlafen","p":25.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"180g/m²","Breite":"230cm ± 2 cm","Wattierung":"150g/m²"}},{"id":"sleep_7_150g","n":"Sleep 7 150g","cat":"schlafen","p":25.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"200g/m²","Breite":"230cm ± 2 cm","Wattierung":"150g/m²"}},{"id":"sleep_8_150g","n":"Sleep 8 150g","cat":"schlafen","p":25.0,"props":{"Zusammensetzung":"100% PES","Gewicht":"200/m²","Breite":"230cm ± 2 cm","Wattierung":"150g/m²"}}];
+</script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body,#root{height:100%;width:100%}
+body{
+  font-family:'Wix Madefor Text','Wix Madefor Display',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:#FFFFFF;
+  color:#1E1A17;-webkit-font-smoothing:antialiased;font-size:16px;
+}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-thumb{background:rgba(165,106,67,.28);border-radius:4px}
+
+/* Lightbox */
+.lightbox-overlay {
+  position:fixed;inset:0;background:rgba(26,26,26,.55);z-index:9999;
+  display:block;overflow-y:auto;overscroll-behavior:contain;
+  padding:clamp(16px,4vh,32px) 1rem;
+  animation:fadeIn .15s ease;
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.lightbox-box {
+  background:#FFFFFF;max-width:min(420px, calc(100vw - 2rem));width:100%;padding:1.8rem;
+  position:relative;box-shadow:0 8px 40px rgba(0,0,0,.3);
+  max-height:calc(100vh - 2rem);overflow:hidden;
+  display:flex;flex-direction:column;
+  margin:0 auto;
+  animation:slideUp .18s ease;
+}
+.lightbox-scroll {
+  overflow-y:auto;overflow-x:hidden;flex:1;min-height:0;
+  padding-right:.3rem;
+}
+@keyframes slideUp{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
+.lightbox-close {
+  position:absolute;top:12px;right:14px;background:none;border:none;
+  font-size:18px;cursor:pointer;color:#8F7B66;line-height:1;
+}
+.lightbox-close:hover{color:#1E1A17}
+.sidebar-form-preview{
+  display:block;
+  margin:0 auto;
+  transform:scale(1);
+  transform-origin:center;
+  transition:transform .18s ease;
+}
+.sidebar-form-preview:hover{
+  transform:scale(1.1);
+}
+
+/* Info button */
+.info-btn {
+  width:18px;height:18px;border-radius:50%;border:1px solid rgba(165,106,67,.32);
+  background:transparent;color:#A56A43;font-size:10px;font-weight:700;
+  cursor:pointer;display:inline-flex;align-items:center;justify-content:center;
+  flex-shrink:0;line-height:1;padding:0;transition:all .15s ease;
+}
+.info-btn:hover{background:#A56A43;color:#FFFFFF}
+
+/* Color warning */
+.color-warning {
+  background:rgba(165,106,67,.07);border-left:3px solid rgba(165,106,67,.45);
+  padding:12px 14px;font-size:11px;color:#6B625A;line-height:1.7;
+  margin-bottom:1rem;display:flex;gap:8px;align-items:flex-start;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  #root { height: auto !important; }
+  .lightbox-box{padding:1.1rem;max-height:calc(100vh - 1rem);max-width:calc(100vw - 1rem)}
+  .lightbox-scroll{padding-right:.1rem}
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+const { useState, useMemo, useEffect, useCallback, useRef } = React;
+
+const C = {
+  linen:"#FAFAF8",linen2:"#FFFFFF",bark:"#1E1A17",bark2:"#31443A",
+  moss:"#607063",sand:"#A56A43",sand2:"#D7C8BC",chalk:"#FFFFFF",mid:"#6B625A",
+};
+const fmt = n => n.toFixed(2).replace(".",",") + " €";
+
+const FOAM_TYPES = {
+  "none":      {name:"Kein Schaumstoff",         density:0 },
+  "pur_18_20": {name:"PUR 18/20 – sehr weich",   density:18},
+  "pur_22_40": {name:"PUR 22/40 – mittelweich",  density:22},
+  "pur_30_48": {name:"PUR 30/48 – fest",         density:30},
+  "pur_40_70": {name:"PUR 40/70 – sehr fest",    density:40},
+  "hr_30_40":  {name:"HR Kaltschaum 30/40 H2",   density:30},
+  "hr_40_40":  {name:"HR Kaltschaum 40/40 H3",   density:40},
+  "hr_45_50":  {name:"HR Kaltschaum 45/50 H4",   density:45},
+};
+
+const FORMS = [
+  {id:"29",                   label:"Rechteck – Würfel",                    foamFactor:1,    sides:["a","b","c"]            },
+  {id:"9",                    label:"Klappmatratze / 2-teilig",             foamFactor:1,    sides:["a","b","c","d"],
+    dimLabels:{a:"Dicke",b:"Breite",c:"Länge Teil 1",d:"Länge Teil 2"},
+    dimHints:{a:"= Höhe / Dicke des Polsters",c:"= Länge des ersten Elements",d:"= Länge des zweiten Elements"}
+  },
+  {id:"22",                   label:"Klappmatratze / 3-teilig",             foamFactor:1,    sides:["a","b","c","d","e"],
+    dimLabels:{a:"Dicke",b:"Breite",c:"Länge Teil 1",d:"Länge Teil 2",e:"Länge Teil 3"},
+    dimHints:{a:"= Höhe / Dicke des Polsters",c:"= Länge des ersten Elements",d:"= Länge des mittleren Elements",e:"= Länge des dritten Elements"}
+  },
+  {id:"30",                   label:"Rechteck mit Schrägabschnitt",         foamFactor:1.2,  sides:["a","b","c","d","e"]    },
+  {id:"27",                   label:"Rechteck mit kleinem Eckabschnitt",    foamFactor:1.2,  sides:["a","b","c","d","e","f"]},
+  {id:"44",                   label:"Rechtwinkliges Dreieck",               foamFactor:1.8,  sides:["a","b","c"]            },
+  {id:"34",                   label:"Gleichseitiges Dreieck",               foamFactor:1.6,  sides:["a","b","c"]            },
+  {id:"33",                   label:"Dreieck mit Abschnitt",                foamFactor:1.2,  sides:["a","b","c","d"]        },
+  {id:"42",                   label:"Trapez",                               foamFactor:1.58, sides:["a","b","c","d"]        },
+  {id:"37",                   label:"Fünfeck",                              foamFactor:2.12, sides:["a","b","c","d"]        },
+  {id:"43",                   label:"Sechseck",                             foamFactor:2.12, sides:["a","b","c","d"]        },
+  {id:"35",                   label:"Achteck",                              foamFactor:2.2,  sides:["a","b","c","d","e"]    },
+  {id:"31",                   label:"Rechteck mit 2 Eckabschnitten",        foamFactor:1.2,  sides:["a","b","c","d","e"]    },
+  {id:"39",                   label:"Eckkissen",                            foamFactor:1.95, sides:["a","b","c","d","e","f"]},
+  {id:"36",                   label:"L-Form",                               foamFactor:1.89, sides:["a","b","c","d","e"]    },
+  {id:"32",                   label:"U-Form",                               foamFactor:1.82, sides:["a","b","c","d","e"]    },
+  {id:"40",                   label:"Rechteck mit Eckabschnitt",            foamFactor:1.2,  sides:["a","b","c","d","e"]    },
+  {id:"41",                   label:"Rechteck mit Abschnitt",               foamFactor:1.2,  sides:["a","b","c","d"]        },
+  {id:"45",                   label:"Rechteck mit 4 Eckabschnitten",        foamFactor:2,    sides:["a","b","c","d","e"]    },
+  {id:"38",                   label:"Rechteck mit 2 Schrägabschnitten",     foamFactor:1.2,  sides:["a","b","c","d","e"]    },
+];
+
+const FORM_IMAGES = window.FORM_IMAGES || {};
+const MIN_FABRIC_PRICE = 41;
+const FABRIC_BASE_DISCOUNT = 4;
+const FABRICS = (window.FABRIC_DATA || []).map(fabric => ({
+  ...fabric,
+  p: Math.max(0, Number(fabric?.p || 0) - FABRIC_BASE_DISCOUNT),
+}));
+const FORM_IMAGE_BASE_URL = (window.FORM_IMAGE_BASE_URL || "https://raw.githubusercontent.com/PolsterKonf/polster24-konfigurator/refs/heads/main/forms").replace(/\/+$/,"");
+const FABRIC_IMAGE_BASE_URL = (window.FABRIC_IMAGE_BASE_URL || "https://raw.githubusercontent.com/PolsterKonf/polster24-konfigurator/refs/heads/main/fabrics").replace(/\/+$/,"");
+
+const getFormImageCandidates = (formId) => {
+  if (!formId) return [];
+  const exts = ["png","svg","webp","jpg","jpeg"];
+  const local = exts.map(ext => `forms/${formId}.${ext}`);
+  const remote = exts.map(ext => `${FORM_IMAGE_BASE_URL}/${formId}.${ext}`);
+  return [...local, ...remote];
+};
+
+const getFormImageSrc = (formId) => getFormImageCandidates(formId)[0] || "";
+
+const probeImageUrl = (url) => new Promise((resolve) => {
+  if (!url) {
+    resolve(false);
+    return;
+  }
+  const img = new Image();
+  img.onload = () => resolve(true);
+  img.onerror = () => resolve(false);
+  img.src = url;
+});
+
+const resolveFirstWorkingImage = async (candidates) => {
+  for (const url of candidates) {
+    if (await probeImageUrl(url)) return url;
+  }
+  return "";
+};
+
+const resolveFormImageSrc = async (formId) => (
+  resolveFirstWorkingImage(getFormImageCandidates(formId))
+);
+
+const calculateMetrics = (form, dims) => {
+  const a = parseFloat(dims.a || 0) / 100;
+  const b = parseFloat(dims.b || 0) / 100;
+  const c = parseFloat(dims.c || 0) / 100;
+  const d = parseFloat(dims.d || 0) / 100;
+  const e = parseFloat(dims.e || 0) / 100;
+
+  if (form?.id === "9") {
+    if (!a || !b || !c || !d) {
+      return { surface: 0, volume: 0 };
+    }
+    const surface = (2 * (a * b + a * c + b * c)) + (2 * (a * b + a * d + b * d));
+    const volume = (a * b * c) + (a * b * d);
+    return { surface, volume };
+  }
+
+  if (form?.id === "22") {
+    if (!a || !b || !c || !d || !e) {
+      return { surface: 0, volume: 0 };
+    }
+    const surface =
+      (2 * (a * b + a * c + b * c)) +
+      (2 * (a * b + a * d + b * d)) +
+      (2 * (a * b + a * e + b * e));
+    const volume = (a * b * c) + (a * b * d) + (a * b * e);
+    return { surface, volume };
+  }
+
+  if (!a || !b || !c) {
+    return { surface: 0, volume: 0 };
+  }
+
+  return {
+    surface: 2 * (a * b + a * c + b * c),
+    volume: a * b * c,
+  };
+};
+
+const getFabricImageCandidates = (fabric) => {
+  if (!fabric) return [];
+  const custom = [fabric.img, fabric.image].filter(Boolean);
+  const hasConfiguredGithubBase =
+    FABRIC_IMAGE_BASE_URL &&
+    !FABRIC_IMAGE_BASE_URL.includes("DEIN-BENUTZERNAME/DEIN-REPO");
+
+  if (!hasConfiguredGithubBase) return custom;
+
+  const exts = ["jpg","jpeg","png","webp"];
+  return [...custom, ...exts.map(ext => `${FABRIC_IMAGE_BASE_URL}/${fabric.id}.${ext}`)];
+};
+
+const PROP_LABELS = {
+  "Zusammensetzung": "Zusammensetzung",
+  "Gewicht": "Gewicht",
+  "Breite": "Breite",
+  "Lichtechtheit": "Lichtechtheit",
+  "Scheuerfestigkeit": "Scheuerfestigkeit",
+  "Wattierung": "Wattierung",
+};
+
+const PROP_ICONS = {
+  "Zusammensetzung": "🧵",
+  "Gewicht": "⚖️",
+  "Breite": "📏",
+  "Lichtechtheit": "☀️",
+  "Scheuerfestigkeit": "🔄",
+  "Wattierung": "☁️",
+};
+
+const getFabricCategoryLabel = (fabric) => ((fabric?.n || "").trim().split(/\s+/)[0] || "Sonstige");
+const getFabricCategoryKey = (fabric) => getFabricCategoryLabel(fabric).toLocaleLowerCase("de-DE");
+const FABRIC_CATEGORY_OPTIONS = (() => {
+  const categories = [];
+  const seen = new Set();
+
+  FABRICS.forEach((fabric) => {
+    const key = getFabricCategoryKey(fabric);
+    if (!key || seen.has(key)) return;
+    seen.add(key);
+    categories.push({ key, label: getFabricCategoryLabel(fabric) });
+  });
+
+  categories.sort((a, b) => a.label.localeCompare(b.label, "de-DE", { sensitivity: "base" }));
+  categories.push({ key: "alle", label: "Alle" });
+  return categories;
+})();
+
+const EXTRAS = [
+  {id:"rz",  label:"Reißverschluss",        icon:"🔐",desc:"Abnehmbarer Bezug – inklusive.",          perM2:false,price:0},
+  {id:"watt",label:"Wattierung",             icon:"☁️", desc:"Weichere Optik durch Watteschicht.",    perM2:true, price:8},
+  {id:"trik",label:"Trikotierung (Jersey)",  icon:"🧤",desc:"Schützende Jerseyschicht um den Kern.", perM2:true, price:4},
+  {id:"anti",label:"Anti-Rutsch Unterseite", icon:"🛑",desc:"Ideal für glatte Stühle und Bänke.",    perM2:true, price:3},
+];
+
+const STEPS = ["Form","Maße","Stoff","Schaum","Extras","Warenkorb"];
+const FOAM_PRICE_PER_KG = 22;
+const LP_AREAS = ["Van & Camp","Yacht & Boot","Garten","Zuhause"];
+const LP_PROMISES = [
+  {title:"Maßanfertigung nach Wunsch", text:"Jedes Polster wird passend zu deinen Maßen und deinem Einsatzbereich gefertigt."},
+  {title:"Versandfrei ab 89 €", text:"Ab 89 € Bestellwert liefern wir deine Konfiguration versandkostenfrei."},
+  {title:"Stoffmuster auf Anfrage", text:"Auf Wunsch kannst du Material und Farbe vor der Bestellung besser abstimmen."},
+];
+
+// ── Components ──
+const Tip = ({children}) => (
+  React.createElement('div',{style:{
+    background:"rgba(165,106,67,.05)",border:`1px solid rgba(165,106,67,.12)`,
+    padding:"12px 14px",fontSize:12,color:C.mid,lineHeight:1.7,marginBottom:"1.2rem",
+    borderRadius:4
+  }},children)
+);
+
+const SH = ({n,title,sub}) => (
+  React.createElement('div',{style:{marginBottom:"1.8rem"}},
+    React.createElement('div',{style:{fontSize:11,letterSpacing:"0.2em",textTransform:"uppercase",
+      color:C.sand,display:"flex",alignItems:"center",gap:8,marginBottom:10,fontWeight:500}},
+      React.createElement('span',{style:{width:24,height:1,background:C.sand2,display:"inline-block"}}),
+      `Schritt ${n} von 6`
+    ),
+    React.createElement('h2',{style:{fontSize:"clamp(1.9rem,2.7vw,3rem)",fontWeight:300,
+      lineHeight:1.02,fontFamily:"Wix Madefor Text, Wix Madefor Display, sans-serif",letterSpacing:"-0.03em",marginBottom:10,color:C.bark,maxWidth:700}},title),
+    React.createElement('p',{style:{fontSize:15,color:C.mid,lineHeight:1.7,maxWidth:640}},sub)
+  )
+);
+
+const HeroPanel = ({isMobile}) => (
+  React.createElement('section',{style:{
+    position:"relative",
+    overflow:"hidden",
+    marginBottom:isMobile?"1.6rem":"2.6rem",
+    padding:isMobile?"1.2rem":"1.6rem 1.7rem",
+    background:"#FFFFFF",
+    border:"1px solid rgba(0,0,0,.08)",
+    borderRadius:18,
+    boxShadow:"0 16px 34px rgba(0,0,0,.05)"
+  }},
+    React.createElement('div',{style:{
+      position:"absolute",inset:"auto -40px -48px auto",width:180,height:180,
+      borderRadius:"50%",background:"rgba(165,106,67,.08)",filter:"blur(2px)"
+    }}),
+    React.createElement('div',{style:{
+      display:"flex",alignItems:"center",justifyContent:"space-between",gap:16,flexWrap:"wrap",
+      marginBottom:"1rem"
+    }},
+      React.createElement('div',{style:{
+        fontSize:11,letterSpacing:"0.18em",textTransform:"uppercase",fontWeight:700,color:C.sand
+      }},"LP-Polster Konfigurator"),
+      React.createElement('div',{style:{display:"flex",gap:8,flexWrap:"wrap"}},
+        LP_AREAS.map(area => React.createElement('span',{key:area,style:{
+          padding:"6px 10px",fontSize:10,letterSpacing:"0.08em",textTransform:"uppercase",
+          borderRadius:999,background:"rgba(49,68,58,.08)",color:C.bark
+        }},area))
+      )
+    ),
+    React.createElement('div',{style:{maxWidth:820,position:"relative",zIndex:1}},
+      React.createElement('h1',{style:{
+        fontFamily:"Wix Madefor Text, Wix Madefor Display, sans-serif",fontSize:isMobile?"2.4rem":"3.4rem",
+        lineHeight:.92,fontWeight:500,letterSpacing:"-0.04em",color:C.bark,marginBottom:"0.75rem"
+      }},"Polster und Bezüge nach Maß, passend zu deinem Projekt."),
+      React.createElement('p',{style:{
+        fontSize:isMobile?14:15,color:C.mid,lineHeight:1.8,maxWidth:720,marginBottom:"1rem"
+      }},"Konfiguriere deine Wunschform, wähle Stoff und Füllung und bestelle dein Polster nach Maß für Van, Boot, Gartenmöbel oder Wohnraum einfach direkt online."),
+      React.createElement('div',{style:{display:"flex",gap:10,flexWrap:"wrap",marginBottom:"1rem"}},
+        React.createElement('div',{style:{
+          padding:"10px 14px",background:C.bark2,color:C.chalk,borderRadius:12,fontSize:12,fontWeight:600
+        }},"Versandfrei ab 89 €"),
+        React.createElement('div',{style:{
+          padding:"10px 14px",background:"rgba(165,106,67,.12)",color:C.bark,borderRadius:12,fontSize:12,fontWeight:600
+        }},"Stoffmuster auf Anfrage"),
+        React.createElement('div',{style:{
+          padding:"10px 14px",background:"rgba(49,68,58,.08)",color:C.bark,borderRadius:12,fontSize:12,fontWeight:600
+        }},"Maßanfertigung")
+      )
+    ),
+    React.createElement('div',{style:{
+      display:"grid",gridTemplateColumns:isMobile?"1fr":"repeat(3,minmax(0,1fr))",gap:12
+    }},
+      LP_PROMISES.map(item => React.createElement('div',{key:item.title,style:{
+        background:"#FFFFFF",border:"1px solid rgba(0,0,0,.06)",
+        borderRadius:14,padding:"0.95rem 1rem"
+      }},
+        React.createElement('div',{style:{fontSize:12,fontWeight:700,color:C.bark,marginBottom:4}},item.title),
+        React.createElement('div',{style:{fontSize:12,color:C.mid,lineHeight:1.65}},item.text)
+      ))
+    )
+  )
+);
+
+const DimInput = ({label,value,onChange,isPrice,hint,displayLabel:customLabel}) => {
+  const displayLabel = customLabel || (label==="a" ? "Dicke" : `Seite ${label.toUpperCase()}`);
+  const finalHint    = hint || (label==="a" ? "= Höhe / Dicke des Polsters" : "");
+  return React.createElement('div',{style:{display:"flex",flexDirection:"column",gap:4}},
+    React.createElement('div',{style:{fontSize:11,letterSpacing:"0.1em",textTransform:"uppercase",
+      color:isPrice?C.sand:C.mid,display:"flex",alignItems:"center",gap:6}},
+      React.createElement('span',{style:{width:20,height:20,
+        background:isPrice?C.sand:"rgba(165,106,67,.16)",
+        color:isPrice?C.chalk:C.mid,borderRadius:2,display:"inline-flex",
+        alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:700,flexShrink:0}},
+        label.toUpperCase()
+      ),
+      displayLabel
+    ),
+    React.createElement('div',{style:{position:"relative"}},
+      React.createElement('input',{type:"number",min:"1",max:"500",placeholder:"cm",
+        value:value||"",onChange:e=>onChange(e.target.value),
+        style:{width:"100%",background:C.chalk,
+          border:`1.5px solid ${isPrice?"rgba(165,106,67,.28)":"rgba(0,0,0,.08)"}`,
+          padding:"12px 36px 12px 14px",fontSize:16,color:C.bark,outline:"none"}}),
+      React.createElement('span',{style:{position:"absolute",right:10,top:"50%",
+        transform:"translateY(-50%)",fontSize:11,color:C.mid}},"cm")
+    ),
+    finalHint && React.createElement('span',{style:{fontSize:10,color:C.mid}},finalHint)
+  );
+};
+
+const FabricPreview = ({fabric, size=56}) => {
+  const candidates = getFabricImageCandidates(fabric);
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    setIdx(0);
+  }, [fabric?.id]);
+
+  const src = candidates[idx];
+  if (!src) {
+    return React.createElement('div',{style:{
+      width:size,height:size,flexShrink:0,
+      background:"rgba(165,106,67,.12)",border:"1px solid rgba(0,0,0,.08)",
+      display:"flex",alignItems:"center",justifyContent:"center",fontSize:Math.round(size*0.42),
+      color:C.mid
+    }},"🎨");
+  }
+
+  return React.createElement('img',{
+    src,
+    alt:fabric?.n || "Stoffbild",
+    width:size,
+    height:size,
+    onError:()=>setIdx(current => current + 1 < candidates.length ? current + 1 : current),
+    style:{
+      width:size,height:size,flexShrink:0,display:"block",objectFit:"cover",
+      background:"rgba(165,106,67,.06)",border:"1px solid rgba(0,0,0,.08)"
+    }
+  });
+};
+
+const FormPreview = ({formId, size=100, style={}, className=""}) => {
+  const candidates = getFormImageCandidates(formId);
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    setIdx(0);
+  }, [formId]);
+
+  const src = candidates[idx];
+  if (!src) return null;
+
+  return React.createElement('img',{
+    className,
+    src,
+    alt:formId,
+    width:size,
+    height:size,
+    onError:()=>setIdx(current => current + 1 < candidates.length ? current + 1 : current),
+    style:{objectFit:"contain", ...style}
+  });
+};
+
+// Info Lightbox
+const FabricLightbox = ({fabric, onClose}) => {
+  const props = fabric.props || {};
+  const entries = Object.entries(props).filter(([,v]) => v && v !== 'NaN');
+  
+  useEffect(() => {
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const handler = (e) => { if(e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', handler);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.removeEventListener('keydown', handler);
+    };
+  }, [onClose]);
+
+  const detailRows = entries.length > 0
+    ? entries.map(([key, val]) =>
+        React.createElement('div', {
+          key,
+          style: {display: 'flex', gap: 10, alignItems: 'flex-start'}
+        },
+          React.createElement('span', {
+            style: {fontSize: 14, flexShrink: 0, width: 22}
+          }, PROP_ICONS[key] || '•'),
+          React.createElement('div', null,
+            React.createElement('div', {
+              style: {fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.mid, marginBottom: 1}
+            }, PROP_LABELS[key] || key),
+            React.createElement('div', {
+              style: {fontSize: 13, color: C.bark}
+            }, String(val))
+          )
+        )
+      )
+    : [
+        React.createElement('p', {
+          key: 'empty',
+          style: {fontSize: 13, color: C.mid}
+        }, 'Keine weiteren Eigenschaften hinterlegt.')
+      ];
+
+  return React.createElement('div', {
+    className: 'lightbox-overlay',
+    onClick: (e) => { if (e.target === e.currentTarget) onClose(); }
+  },
+    React.createElement('div', {
+      className: 'lightbox-box',
+      onClick: (e) => e.stopPropagation()
+    },
+      React.createElement('button', {className: 'lightbox-close', onClick: onClose}, '✕'),
+      React.createElement('div', {className: 'lightbox-scroll'},
+        React.createElement('div', {style: {marginBottom: '1.2rem'}},
+          React.createElement(FabricPreview, {fabric, size: 300}),
+          React.createElement('div', {style: {height: 12}}),
+          React.createElement('div', {
+            style: {fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase', color: C.sand, marginBottom: 4}
+          }, 'Stoffdetails'),
+          React.createElement('h3', {
+            style: {fontFamily: 'Wix Madefor Text, Wix Madefor Display, sans-serif', fontWeight: 600, fontSize: '1.35rem', color: C.bark}
+          }, fabric?.n || 'Stoff'),
+          React.createElement('div', {
+            style: {fontSize: 11, color: C.mid, marginTop: 2}
+          }, `${getFabricCategoryLabel(fabric)} · ${fmt(Number(fabric?.p || 0))}/lm`)
+        ),
+        React.createElement('div', {
+          style: {height: 1, background: 'rgba(0,0,0,.08)', marginBottom: '1rem'}
+        }),
+        React.createElement('div', {
+          style: {display: 'flex', flexDirection: 'column', gap: 10}
+        }, ...detailRows),
+        React.createElement('div', {
+          style: {height: 1, background: 'rgba(0,0,0,.08)', margin: '1.2rem 0'}
+        }),
+        React.createElement('button', {
+          onClick: onClose,
+          style: {
+            width: '100%',
+            background: C.bark,
+            color: C.chalk,
+            border: 'none',
+            padding: '10px',
+            fontSize: 12,
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            cursor: 'pointer'
+          }
+        }, 'Schließen')
+      )
+    )
+  );
+};
+
+function App() {
+  const [isMobile,   setIsMobile]  = useState(()=>{ try{ return window.innerWidth<=768; }catch(e){ return false; } });
+  const [cartError,  setCartError]  = useState(null);
+  const [cartLoading,setCartLoading]= useState(false);
+  const [step,       setStep]      = useState(0);
+  const [formId,     setFormId]    = useState("29");
+  const [dims,       setDims]      = useState({});
+  const [foamKey,    setFoamKey]   = useState("none");
+  const [fabric,     setFabric]    = useState(null);
+  const [fabFilter,  setFabFilter] = useState("calima");
+  const [extras,     setExtras]    = useState({rz:true});
+  const [cartAck,    setCartAck]   = useState(false);
+  const [success,    setSuccess]   = useState(false);
+  const [order,      setOrder]     = useState({fn:"",ln:"",email:"",phone:"",addr:"",pay:"",note:""});
+  const [expandedFabricId, setExpandedFabricId] = useState(null);
+  const mainContentRef = useRef(null);
+
+  useEffect(()=>{
+    const handler = ()=>setIsMobile(window.innerWidth<=768);
+    window.addEventListener('resize',handler);
+    return ()=>window.removeEventListener('resize',handler);
+  },[]);
+
+  useEffect(()=>{
+    const handler = (event)=>{
+      let msg;
+      try { msg = typeof event.data==="string"?JSON.parse(event.data):event.data; } catch(e){ return; }
+      if(msg?.type==="POLSTER24_CART_SUCCESS"){
+        setCartLoading(false);setCartError(null);setSuccess(true);
+      }
+      if(msg?.type==="POLSTER24_CART_ERROR"){
+        setCartError(msg.error||"Fehler beim Hinzufügen zum Warenkorb.");setCartLoading(false);
+      }
+    };
+    window.addEventListener("message", handler);
+    return ()=>window.removeEventListener("message", handler);
+  },[]);
+
+  useEffect(()=>{
+    const reportHeight = ()=>{
+      const h = document.body.scrollHeight;
+      window.parent.postMessage({intent:"TPA2",type:"setHeight",compId:"konfigurator",
+        namespace:"Wix",version:"1.0",data:{height:h}}, "*");
+    };
+    reportHeight();
+    const observer = new ResizeObserver(reportHeight);
+    observer.observe(document.body);
+    return ()=>observer.disconnect();
+  },[step, success]);
+
+  const cf   = FORMS.find(f=>f.id===formId)||FORMS[0];
+  const foam = FOAM_TYPES[foamKey];
+  const fab  = FABRICS.find(f=>f.id===fabric);
+
+  const prices = useMemo(()=>{
+    const { surface, volume } = calculateMetrics(cf, dims);
+    if(!surface||!volume) return {fabric:0,foam:0,jersey:0,wadding:0,extras:0,total:0,surface:0,volume:0};
+    const fabricRaw = fab ? Math.round(surface*fab.p*100)/100 : 0;
+    const fabricCost = fabricRaw>0 ? Math.max(MIN_FABRIC_PRICE, fabricRaw) : 0;
+    const foamCost = foam.density>0 ? Math.round(cf.foamFactor*FOAM_PRICE_PER_KG*foam.density*volume*100)/100 : 0;
+    const jerseyCost  = extras.trik ? Math.round(4*surface*100)/100 : 0;
+    const waddingCost = extras.watt ? Math.round(8*surface*100)/100 : 0;
+    const otherExtras = EXTRAS
+      .filter(e=>e.id!=="watt"&&e.id!=="trik"&&extras[e.id])
+      .reduce((s,e)=>s+(e.perM2 ? Math.round(e.price*surface*100)/100 : e.price),0);
+    const total = fabricCost+foamCost+jerseyCost+waddingCost+otherExtras;
+    return {fabric:fabricCost,foam:foamCost,jersey:jerseyCost,wadding:waddingCost,
+      extras:otherExtras,total:Math.round(total*100)/100,
+      surface:Math.round(surface*1000)/1000,
+      volume:Math.round(volume*1000000)/10};
+  },[dims.a,dims.b,dims.c,dims.d,dims.e,fab,foamKey,extras,cf]);
+
+  const shipping = prices.total>0 ? (prices.total>=89?0:4.50) : 0;
+  const dimsOK = cf.sides.every(k=>(dims[k]||"")&&parseFloat(dims[k])>0);
+  const canNext = [true,dimsOK,!!fabric,true,true,true];
+  const go=n=>{if(n>=0&&n<=5)setStep(n);};
+
+  useEffect(()=>{
+    const scrollTarget = () => {
+      const el = mainContentRef.current;
+      if (el && typeof el.scrollIntoView === "function") {
+        try {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        } catch (e) {
+          el.scrollIntoView(true);
+        }
+      }
+      try {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (e) {
+        window.scrollTo(0, 0);
+      }
+      try {
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+      } catch (e) {}
+    };
+
+    const id = window.requestAnimationFrame
+      ? window.requestAnimationFrame(scrollTarget)
+      : setTimeout(scrollTarget, 0);
+
+    return () => {
+      if (window.cancelAnimationFrame && typeof id === "number") {
+        window.cancelAnimationFrame(id);
+      } else {
+        clearTimeout(id);
+      }
+    };
+  }, [step]);
+  const setDim=(k,v)=>setDims(d=>({...d,[k]:v}));
+
+  const toggleFabricDetails = useCallback((e, fabId) => {
+    e.stopPropagation();
+    setExpandedFabricId(current => current === fabId ? null : fabId);
+  }, []);
+
+  const renderFabricDetailRows = useCallback((fabricData) => {
+    const entries = Object.entries(fabricData?.props || {}).filter(([,v]) => v && v !== 'NaN');
+    if (!entries.length) {
+      return React.createElement('p', {
+        style: {fontSize: 13, color: C.mid}
+      }, 'Keine weiteren Eigenschaften hinterlegt.');
+    }
+    return entries.map(([key, val]) =>
+      React.createElement('div', {
+        key,
+        style: {display: 'flex', gap: 10, alignItems: 'flex-start'}
+      },
+        React.createElement('span', {
+          style: {fontSize: 14, flexShrink: 0, width: 22}
+        }, PROP_ICONS[key] || '•'),
+        React.createElement('div', null,
+          React.createElement('div', {
+            style: {fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: C.mid, marginBottom: 1}
+          }, PROP_LABELS[key] || key),
+          React.createElement('div', {
+            style: {fontSize: 13, color: C.bark}
+          }, String(val))
+        )
+      )
+    );
+  }, []);
+
+  const renderStep=()=>{
+    switch(step){
+      case 0: return React.createElement('div',null,
+        React.createElement(SH,{n:1,
+          title:React.createElement('span',null,"Wähle die ",React.createElement('em',{style:{color:C.sand,fontStyle:"italic"}},"Form"),React.createElement('br'),"deines Polsters."),
+          sub:"Klicke auf die passende Form. Die Maße gibst du im nächsten Schritt ein."}),
+        React.createElement('div',{style:{display:"grid",gridTemplateColumns:isMobile?"repeat(2,minmax(0,1fr))":"repeat(3,minmax(0,1fr))",gap:isMobile?12:16,
+          background:"transparent",marginBottom:"1.5rem",borderRadius:4,overflow:"visible"}},
+          FORMS.map(f=>React.createElement('div',{key:f.id,
+            onClick:()=>{setFormId(f.id);setDims({});},
+            style:{background:formId===f.id?C.linen2:C.chalk,padding:isMobile?"1rem .7rem":"1.35rem 1rem",
+              minHeight:isMobile?null:190,
+              cursor:"pointer",textAlign:"center",transition:"all .2s",position:"relative",
+              border:`2px solid ${formId===f.id?C.sand:"transparent"}`}},
+            formId===f.id&&React.createElement('div',{style:{position:"absolute",top:4,right:6,
+              fontSize:10,color:C.sand,fontWeight:700}},"✓"),
+            React.createElement(FormPreview,{formId:f.id,size:isMobile?100:132,style:{display:"block",margin:"0 auto 12px"}}),
+            React.createElement('div',{style:{fontSize:isMobile?10:11,fontWeight:500,color:C.bark,lineHeight:1.4}},f.label)
+          ))
+        ),
+        React.createElement(Tip,null,"Wähle die Form die deinem Polster am nächsten kommt.")
+      );
+
+      case 1: {
+        return React.createElement('div',null,
+          React.createElement(SH,{n:2,
+            title:React.createElement('span',null,"Maße für ",React.createElement('em',{style:{color:C.sand,fontStyle:"italic"}},cf.label),"."),
+            sub:"Alle Maße in cm angeben. A = Dicke des Polsters."}),
+          React.createElement('div',{style:{background:C.chalk,border:"1px dashed rgba(165,106,67,.22)",
+            padding:"1.5rem",display:"flex",flexDirection:"column",alignItems:"center",
+            justifyContent:"center",marginBottom:"1.5rem",gap:8,borderRadius:4}},
+            React.createElement(FormPreview,{formId,size:isMobile?220:360}),
+            cf.sides.every(k=>dims[k])&&React.createElement('div',{style:{fontSize:11,color:C.sand,textAlign:"center"}},
+              cf.sides.map(k=>dims[k]?`${k.toUpperCase()}=${dims[k]}cm`:"").filter(Boolean).join(" · "),
+              prices.total>0&&fab&&React.createElement('span',{style:{color:C.moss,marginLeft:8}},`→ ${fmt(prices.total)}`)
+            )
+          ),
+          React.createElement('div',{style:{marginBottom:"1.2rem"}},
+            React.createElement('div',{style:{fontSize:10,letterSpacing:"0.16em",textTransform:"uppercase",
+              color:C.sand,marginBottom:"0.7rem",display:"flex",alignItems:"center",gap:6}},
+              React.createElement('span',{style:{width:18,height:1,background:C.sand,display:"inline-block"}}),
+              "Alle Maße eingeben (Pflichtfelder)"
+            ),
+            React.createElement('div',{style:{display:"grid",
+              gridTemplateColumns:isMobile?`repeat(${Math.min(cf.sides.length,2)},1fr)`:`repeat(${Math.min(cf.sides.length,3)},1fr)`,gap:"1rem"}},
+              cf.sides.map(k=>React.createElement(DimInput,{key:k,label:k,value:dims[k]||"",
+                onChange:v=>setDim(k,v),isPrice:true,
+                displayLabel:cf.dimLabels?.[k],
+                hint:cf.dimHints?.[k]}))
+            )
+          ),
+          React.createElement(Tip,null,
+            (cf.id==="9" || cf.id==="22")
+              ? React.createElement('span',null,"📐 ",React.createElement('strong',null,
+                  cf.id==="22"
+                    ? "A = Dicke, B = Breite, C/D/E = Längen der drei Klappteile."
+                    : "A = Dicke, B = Breite, C/D = Längen der beiden Klappteile."))
+              : React.createElement('span',null,"📐 ",React.createElement('strong',null,"A = Dicke:"),
+                  " Sitzpolster 8–12 cm · Rückenpolster 4–6 cm · Matratzen 10–18 cm")
+          )
+        );
+      }
+
+      case 2: {
+        const filtered = fabFilter==="alle" ? FABRICS : FABRICS.filter(f=>getFabricCategoryKey(f)===fabFilter);
+        return React.createElement('div',null,
+          React.createElement(SH,{n:3,
+            title:React.createElement('span',null,"Wähle deinen",React.createElement('br'),React.createElement('em',{style:{color:C.sand,fontStyle:"italic"}},"Wunschstoff.")),
+            sub:"Laufmeterpreis × Oberfläche = Stoffkosten. Filter nach Kategorie."}),
+
+          // Category filter
+          React.createElement('div',{style:{display:"flex",gap:6,marginBottom:"1rem",flexWrap:"wrap"}},
+            FABRIC_CATEGORY_OPTIONS.map(cat=>
+              React.createElement('button',{key:cat.key,onClick:()=>setFabFilter(cat.key),
+                style:{padding:"7px 12px",fontSize:11,cursor:"pointer",letterSpacing:"0.08em",
+                  textTransform:"uppercase",fontWeight:500,borderRadius:2,
+                  border:`1px solid ${fabFilter===cat.key?C.sand:"rgba(26,26,26,.12)"}`,
+                  background:fabFilter===cat.key?C.sand:"transparent",color:fabFilter===cat.key?C.chalk:C.mid}},
+                cat.label
+              )
+            )
+          ),
+
+          // Count + sample request + color warning
+          React.createElement('div',{style:{marginBottom:"0.8rem"}},
+            React.createElement('div',{style:{display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:8,marginBottom:"0.6rem"}},
+              React.createElement('span',{style:{fontSize:11,color:C.mid}},`${filtered.length} Stoffe`),
+              React.createElement('a',{
+                href:"https://www.lp-polster.com/muster-anfordern",
+                target:"_blank",
+                style:{display:"flex",alignItems:"center",gap:6,
+                  background:"transparent",border:"1.5px solid "+C.sand,
+                  color:C.bark,padding:"8px 14px",fontSize:11,fontWeight:500,borderRadius:2,
+                  letterSpacing:"0.04em",textTransform:"uppercase",
+                  textDecoration:"none",whiteSpace:"nowrap"}},
+                "✉ Stoffmuster anfragen"
+              )
+            ),
+            React.createElement('div',{className:"color-warning"},
+              React.createElement('span',null,"⚠️"),
+              React.createElement('span',null,"Vorsicht: Abhängig von der Art und den Einstellungen des Bildschirms können die Farbtöne der Stoffe tatsächlich von den auf der Webseite präsentierten Fotos abweichen.")
+            )
+          ),
+
+          // Fabric list
+          React.createElement('div',{style:{display:"grid",gridTemplateColumns:isMobile?"1fr":"repeat(2,1fr)",gap:1,
+            background:"rgba(0,0,0,.05)",marginBottom:"1.5rem",borderRadius:4,overflow:"hidden"}},
+            filtered.map(f=>{
+              const on = fabric===f.id;
+              const detailsOpen = expandedFabricId===f.id;
+              const fp = prices.surface>0 ? Math.max(MIN_FABRIC_PRICE,Math.round(prices.surface*f.p*100)/100) : null;
+              return React.createElement('div',{key:f.id,
+                style:{background:on?C.linen2:C.chalk,
+                  border:`2px solid ${on?C.sand:"transparent"}`,transition:"all .2s"}},
+                React.createElement('div',{onClick:()=>setFabric(f.id),
+                  style:{padding:"0.9rem 1rem",cursor:"pointer",display:"flex",alignItems:"center",gap:10}},
+                  React.createElement(FabricPreview,{fabric:f,size:52}),
+                  React.createElement('div',{style:{flex:1,minWidth:0}},
+                    React.createElement('div',{style:{fontSize:12,fontWeight:on?500:300,color:C.bark,
+                      whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}},f.n),
+                    React.createElement('div',{style:{fontSize:11,color:C.mid,marginTop:1}},
+                      `${f.p.toFixed(2)} €/lm`)
+                  ),
+                  fp&&React.createElement('div',{style:{fontSize:12,color:on?C.sand:C.mid,
+                    fontWeight:on?600:300,flexShrink:0}},fmt(fp)),
+                  React.createElement('button',{
+                    className:"info-btn",
+                    onClick:(e)=>toggleFabricDetails(e,f.id),
+                    title:"Stoffeigenschaften anzeigen",
+                    "aria-expanded":detailsOpen
+                  },"ℹ")
+                ),
+                detailsOpen&&React.createElement('div',{
+                  style:{padding:"0 1rem 1rem",borderTop:"1px solid rgba(0,0,0,.08)"}}, 
+                  React.createElement('div',{style:{paddingTop:"0.9rem",marginBottom:"1rem"}},
+                    React.createElement('div',{
+                      style:{fontSize:10,letterSpacing:'0.15em',textTransform:'uppercase',color:C.sand,marginBottom:4}
+                    },'Stoffdetails'),
+                    React.createElement('div',{
+                      style:{fontFamily:'Wix Madefor Text, Wix Madefor Display, sans-serif',fontWeight:600,fontSize:'1.2rem',letterSpacing:'-0.03em',color:C.bark}
+                    },f.n),
+                    React.createElement('div',{
+                      style:{fontSize:11,color:C.mid,marginTop:2}
+                    },`${getFabricCategoryLabel(f)} · ${fmt(Number(f.p || 0))}/lm`)
+                  ),
+                  React.createElement('div',{style:{marginBottom:"1rem"}},
+                    React.createElement(FabricPreview,{fabric:f,size:300})
+                  ),
+                  React.createElement('div',{style:{display:'flex',flexDirection:'column',gap:10,marginBottom:'1rem'}},
+                    ...renderFabricDetailRows(f)
+                  ),
+                  React.createElement('div',{className:"color-warning",style:{marginBottom:0}},
+                    React.createElement('span',null,"⚠️"),
+                    React.createElement('span',null,"Abhängig von der Art und den Einstellungen des Bildschirms können die Farbtöne der Stoffe vom realen Produkt abweichen.")
+                  )
+                )
+              );
+            })
+          ),
+          React.createElement(Tip,null,"Muster sind auf Anfrage möglich, damit Farbe und Material vor der Fertigung besser eingeschätzt werden können.")
+        );
+      }
+
+      case 3: return React.createElement('div',null,
+        React.createElement(SH,{n:4,
+          title:React.createElement('span',null,"Wähle deinen",React.createElement('br'),React.createElement('em',{style:{color:C.sand,fontStyle:"italic"}},"Schaumstoff.")),
+          sub:"Optional – du kannst auch nur einen Bezug ohne Schaumstoff bestellen."}),
+        React.createElement('div',{style:{display:"grid",gridTemplateColumns:"1fr",gap:1,
+          background:"rgba(0,0,0,.05)",marginBottom:"1.5rem",borderRadius:4,overflow:"hidden"}},
+          Object.entries(FOAM_TYPES).map(([key,f])=>{
+            const on=foamKey===key;
+            const vol = calculateMetrics(cf, dims).volume;
+            const fp=f.density>0&&vol>0?Math.round(cf.foamFactor*FOAM_PRICE_PER_KG*f.density*vol*100)/100:null;
+            return React.createElement('div',{key,onClick:()=>setFoamKey(key),
+              style:{background:on?C.linen2:C.chalk,padding:"0.9rem 1.2rem",cursor:"pointer",
+                border:`2px solid ${on?C.sand:"transparent"}`,transition:"all .2s",
+                display:"flex",alignItems:"center",justifyContent:"space-between",gap:12}},
+              React.createElement('div',{style:{display:"flex",alignItems:"center",gap:10}},
+                React.createElement('div',{style:{width:10,height:10,borderRadius:"50%",flexShrink:0,
+                  background:on?C.sand:"rgba(165,106,67,.14)",border:`1.5px solid ${on?C.sand:"rgba(0,0,0,.12)"}`}},),
+                React.createElement('div',null,
+                  React.createElement('div',{style:{fontSize:14,fontWeight:on?500:300,color:C.bark}},f.name),
+                  f.density>0&&React.createElement('div',{style:{fontSize:11,color:C.mid,marginTop:2}},
+                    `Raumgewicht: ${f.density} kg/m³`)
+                )
+              ),
+              React.createElement('div',{style:{textAlign:"right",flexShrink:0}},
+                fp?React.createElement('div',{style:{fontSize:14,color:on?C.sand:C.mid,fontWeight:on?600:300}},
+                  fmt(fp)):
+                React.createElement('div',{style:{fontSize:12,color:C.mid}},"inklusive")
+              )
+            );
+          })
+        ),
+        React.createElement('div',{style:{marginTop:"1.2rem",padding:"1rem 1.2rem",
+          background:C.linen2,border:"1px dashed rgba(165,106,67,.22)",
+          display:"flex",alignItems:"center",justifyContent:"space-between",gap:12}},
+          React.createElement('div',null,
+            React.createElement('div',{style:{fontSize:13,fontWeight:500,color:C.bark}},"Nur Bezug ohne Schaumstoff?"),
+            React.createElement('div',{style:{fontSize:12,color:C.mid,marginTop:3}},
+              "Schaumstoff ist optional – überspringe diesen Schritt wenn du nur einen Bezug möchtest."
+            )
+          ),
+          React.createElement('button',{
+            onClick:()=>{setFoamKey("none");go(4);},
+            style:{background:"transparent",border:"1.5px solid "+C.sand,color:C.bark,
+              padding:"9px 20px",cursor:"pointer",fontSize:12,fontWeight:600,
+              whiteSpace:"nowrap",letterSpacing:"0.05em"}},
+            "Überspringen →"
+          )
+        )
+      );
+
+      case 4: return React.createElement('div',null,
+        React.createElement(SH,{n:5,
+          title:React.createElement('span',null,"Extras &",React.createElement('br'),React.createElement('em',{style:{color:C.sand,fontStyle:"italic"}},"Veredelungen.")),
+          sub:"Alle Extras sind optional. Preise werden live berechnet."}),
+        React.createElement('div',{style:{display:"grid",gridTemplateColumns:"1fr",gap:1,
+          background:"rgba(0,0,0,.05)",marginBottom:"1.5rem",borderRadius:4,overflow:"hidden"}},
+          EXTRAS.map(e=>React.createElement('div',{key:e.id,
+            onClick:()=>setExtras(x=>({...x,[e.id]:!x[e.id]})),
+            style:{background:extras[e.id]?C.linen2:C.chalk,padding:"0.9rem 1.2rem",cursor:"pointer",
+              border:`2px solid ${extras[e.id]?C.sand:"transparent"}`,transition:"all .2s",
+              display:"flex",alignItems:"center",gap:12}},
+            React.createElement('div',{style:{width:18,height:18,border:`1.5px solid ${extras[e.id]?C.sand:C.mid}`,
+              borderRadius:2,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,
+              background:extras[e.id]?C.sand:"transparent"}},
+              extras[e.id]&&React.createElement('span',{style:{fontSize:11,color:C.bark,fontWeight:700}},"✓")
+            ),
+            React.createElement('span',{style:{fontSize:18}},),
+            React.createElement('div',{style:{flex:1}},
+              React.createElement('div',{style:{fontSize:13,fontWeight:500,color:C.bark}},e.label),
+              React.createElement('div',{style:{fontSize:11,color:C.mid,marginTop:2}},e.desc)
+            ),
+            React.createElement('div',{style:{fontSize:13,color:extras[e.id]?C.sand:C.mid,fontWeight:extras[e.id]?600:300}},
+              e.price===0?"inkl.":e.perM2?`+${fmt(e.price)}/m²`:`+${fmt(e.price)}`
+            )
+          ))
+        )
+      );
+
+      case 5: {
+        const extraLabels = Object.entries(extras)
+          .filter(([,v])=>v)
+          .map(([k])=>EXTRAS.find(e=>e.id===k)?.label)
+          .filter(Boolean);
+        const dimText = cf.sides
+          .map(k=>dims[k]?`${k.toUpperCase()} = ${dims[k]} cm`:"")
+          .filter(Boolean).join("\n");
+        const beschreibung = [
+          `📐 Form: ${cf.label}`,
+          `📏 Maße:\n${dimText}`,
+          `🧵 Bezugsstoff: ${fab ? fab.n+" ("+fab.p.toFixed(2)+"€/lm)" : "–"}`,
+          `🟦 Schaumstoff: ${foam.name}${foam.density>0?" ("+foam.density+" kg/m³)":""}`,
+          `➕ Extras: ${extraLabels.length>0?extraLabels.join(", "):"–"}`,
+          ``,
+          `💶 Bezugsstoff: ${prices.fabric>0?fmt(prices.fabric):"–"}`,
+          `💶 Schaumstoff: ${prices.foam>0?fmt(prices.foam):"–"}`,
+          prices.wadding>0?`💶 Wattierung: ${fmt(prices.wadding)}`:"",
+          prices.jersey>0?`💶 Jersey: ${fmt(prices.jersey)}`:"",
+          prices.extras>0?`💶 Extras: ${fmt(prices.extras)}`:"",
+          `🚚 Versand: ${shipping===0?"Kostenlos":fmt(shipping)}`,
+          `💰 Gesamt: ${fmt(prices.total+shipping)}`,
+        ].filter(l=>l!=="").join("\n");
+
+        const handleAddToCart = async () => {
+          setCartError(null);setCartLoading(true);
+          const resolvedFormImage = await resolveFormImageSrc(formId);
+          const cartData = {
+            form:cf.label,formId,dims,
+            fabric:fab?{id:fabric,name:fab.n,price:fab.p}:null,
+            foam:{id:foamKey,name:foam.name,density:foam.density},
+            extras:extraLabels,prices,
+            total:Math.round((prices.total+shipping)*100)/100,
+            shipping,beschreibung,
+            image:resolvedFormImage,
+          };
+          window.parent.postMessage({type:"POLSTER24_ADD_TO_CART",data:cartData},"*");
+          setTimeout(()=>{setCartLoading(false);setCartError("Keine Antwort vom Server. Bitte nochmal versuchen.");},15000);
+        };
+
+        return React.createElement('div',null,
+          React.createElement(SH,{n:6,
+            title:React.createElement('span',null,"Dein LP-Polster",React.createElement('br'),React.createElement('em',{style:{color:C.sand,fontStyle:"italic"}},"im Überblick.")),
+            sub:"Prüfe Form, Stoff und Extras noch einmal, bevor du die Maßanfertigung in den Warenkorb legst."}),
+          React.createElement('div',{style:{background:C.chalk,border:"1px solid rgba(0,0,0,.06)",marginBottom:"1.5rem",borderRadius:8,boxShadow:"0 10px 26px rgba(0,0,0,.03)",overflow:"hidden"}},
+            React.createElement('div',{style:{padding:"1.2rem 1.4rem",borderBottom:"1px solid rgba(0,0,0,.08)"}},
+              React.createElement('div',{style:{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.sand,marginBottom:"0.8rem"}},"Form & Maße"),
+              React.createElement('div',{style:{display:"flex",alignItems:"center",gap:"1.5rem"}},
+                React.createElement(FormPreview,{formId,size:80,style:{flexShrink:0}}),
+                React.createElement('div',null,
+                  React.createElement('div',{style:{fontSize:14,fontWeight:500,color:C.bark,marginBottom:6}},cf.label),
+                  React.createElement('div',{style:{display:"flex",flexWrap:"wrap",gap:6}},
+                    cf.sides.map(k=>dims[k]&&React.createElement('span',{key:k,
+                      style:{background:"rgba(165,106,67,.1)",padding:"3px 8px",fontSize:12,color:C.bark,borderRadius:2}},
+                      `${k.toUpperCase()} = ${dims[k]} cm`
+                    ))
+                  )
+                )
+              )
+            ),
+            fab&&React.createElement('div',{style:{padding:"1rem 1.4rem",borderBottom:"1px solid rgba(0,0,0,.08)",
+              display:"flex",alignItems:"center",justifyContent:"space-between"}},
+              React.createElement('div',null,
+                React.createElement('div',{style:{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.sand,marginBottom:4}},"Bezugsstoff"),
+                React.createElement('div',{style:{display:"flex",alignItems:"center",gap:10}},
+                  React.createElement(FabricPreview,{fabric:fab,size:24}),
+                  React.createElement('span',{style:{fontSize:13,color:C.bark}},fab.n)
+                )
+              ),
+              React.createElement('span',{style:{fontSize:13,color:C.sand,fontWeight:500}},`${fab.p.toFixed(2)} €/lm`)
+            ),
+            React.createElement('div',{style:{padding:"1rem 1.4rem",borderBottom:"1px solid rgba(0,0,0,.08)",
+              display:"flex",justifyContent:"space-between",alignItems:"center"}},
+              React.createElement('div',null,
+                React.createElement('div',{style:{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.sand,marginBottom:4}},"Schaumstoff"),
+                React.createElement('span',{style:{fontSize:13,color:C.bark}},foam.name)
+              ),
+              foam.density>0&&React.createElement('span',{style:{fontSize:12,color:C.mid}},`${foam.density} kg/m³`)
+            ),
+            React.createElement('div',{style:{padding:"1rem 1.4rem",borderBottom:"1px solid rgba(0,0,0,.08)"}},
+              React.createElement('div',{style:{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.sand,marginBottom:6}},"Extras"),
+              React.createElement('div',{style:{display:"flex",flexWrap:"wrap",gap:6}},
+                EXTRAS.map(e=>React.createElement('span',{key:e.id,
+                  style:{padding:"3px 10px",fontSize:12,
+                    background:extras[e.id]?"rgba(165,106,67,.12)":"rgba(165,106,67,.04)",
+                    color:extras[e.id]?C.bark:C.mid,
+                    border:`1px solid ${extras[e.id]?"rgba(165,106,67,.24)":"rgba(0,0,0,.08)"}`,borderRadius:2}},
+                  e.label
+                ))
+              )
+            ),
+            React.createElement('div',{style:{padding:"1rem 1.4rem"}},
+              React.createElement('div',{style:{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.sand,marginBottom:"0.8rem"}},"Preisübersicht"),
+              React.createElement('div',{style:{display:"flex",flexDirection:"column",gap:4}},
+                [["Bezugsstoff",prices.fabric],["Schaumstoff",prices.foam],
+                 ["Wattierung",prices.wadding],["Jersey",prices.jersey],["Extras",prices.extras]
+                ].filter(([,v])=>v>0).map(([k,v])=>
+                  React.createElement('div',{key:k,style:{display:"flex",justifyContent:"space-between"}},
+                    React.createElement('span',{style:{fontSize:12,color:C.mid}},k),
+                    React.createElement('span',{style:{fontSize:12,color:C.bark}},fmt(v))
+                  )
+                )
+              ),
+              React.createElement('div',{style:{height:1,background:"rgba(0,0,0,.08)",margin:"0.8rem 0"}},),
+              React.createElement('div',{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline"}},
+                React.createElement('span',{style:{fontSize:11,color:C.mid}},"Versand"),
+                React.createElement('span',{style:{fontSize:12,color:shipping===0?C.moss:C.bark}},
+                  shipping===0?"Kostenlos ✓":fmt(shipping))
+              ),
+              React.createElement('div',{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginTop:"0.5rem"}},
+                React.createElement('span',{style:{fontSize:13,fontWeight:600,color:C.bark}},"Gesamt"),
+                React.createElement('span',{style:{fontSize:22,fontWeight:700,color:C.sand,fontFamily:"Wix Madefor Text, Wix Madefor Display, sans-serif",letterSpacing:"-0.03em"}},fmt(prices.total+shipping))
+              ),
+              React.createElement('div',{style:{fontSize:10,color:C.mid,marginTop:3}},"inkl. 19% MwSt. zzgl. Versand")
+            )
+          ),
+          cartError&&React.createElement('div',{style:{background:"rgba(180,60,60,.1)",
+            border:"1px solid rgba(180,60,60,.3)",padding:"1rem",marginBottom:"1rem",
+            fontSize:13,color:"#8B2020",lineHeight:1.6}},
+            React.createElement('div',{style:{fontWeight:600,marginBottom:4}},"⚠ Fehler beim Hinzufügen"),
+            cartError,
+            React.createElement('button',{
+              onClick:()=>{setCartError(null);handleAddToCart();},
+              style:{marginTop:"0.8rem",display:"block",width:"100%",
+                background:"transparent",border:"1.5px solid #8B2020",color:"#8B2020",
+                padding:"8px",cursor:"pointer",fontSize:12,fontWeight:600}},
+              "Nochmal versuchen →"
+            )
+          ),
+          React.createElement('div',{style:{
+            marginTop:"1rem",background:"#FFFFFF",border:"1px solid rgba(0,0,0,.08)",
+            borderRadius:8,padding:"1rem 1rem 0.9rem"
+          }},
+            React.createElement('div',{style:{
+              maxHeight:260,overflowY:"auto",paddingRight:"0.4rem",marginBottom:"0.9rem",
+              fontSize:12,lineHeight:1.7,color:C.mid
+            }},
+              React.createElement('div',{style:{fontSize:13,fontWeight:600,color:C.bark,marginBottom:"0.5rem"}},
+                "Hinweise zur Kenntnisnahme"
+              ),
+              React.createElement('p',{style:{marginBottom:"0.8rem"}},
+                React.createElement('strong',null,"Zusätzliche Materialverlängerung – Für Breiten über 140 cm"),
+                React.createElement('br'),
+                "Bei Produkten, deren Breite das jeweilige Stoffmaß überschreitet, wird die gewünschte Breite durch das Annähen von zusätzlichem Material erreicht. Diese Lösung ermöglicht individuelle Maße ohne Abstriche bei Qualität, Stabilität oder optischer Harmonie."
+              ),
+              React.createElement('p',{style:{marginBottom:"0.8rem"}},
+                "Produkte mit einer Breite über dem jeweiligen Stoffmaß profitieren dadurch von Flexibilität, präziser Verarbeitung und einer sauberen Integration der Verlängerung in das Gesamtbild."
+              ),
+              React.createElement('p',{style:{marginBottom:"0.8rem"}},
+                React.createElement('strong',null,"Offener Reißverschluss"),
+                React.createElement('br'),
+                "Diese Variante zeigt den Reißverschluss sichtbar und offen. Sie eignet sich für einen modernen, urbanen Look und betont den funktionalen Charakter als bewusstes Designelement."
+              ),
+              React.createElement('p',{style:{marginBottom:"0.8rem"}},
+                React.createElement('strong',null,"Verdeckter Reißverschluss"),
+                React.createElement('br'),
+                "Hier wird der Reißverschluss durch überlappendes Material verdeckt. Diese Lösung wirkt eleganter, minimalistischer und unterstützt ein nahtloses, zurückhaltendes Design."
+              ),
+              React.createElement('p',null,
+                React.createElement('strong',null,"Rutschfester Boden"),
+                React.createElement('br'),
+                "Die rutschfeste Beschichtung verbessert Stabilität, Sicherheit und Langlebigkeit. Sie wird immer auf der Seite C angebracht. Bitte berücksichtigt dies bei der Eingabe eurer Maße. Besondere Wünsche zur Positionierung bitte im Bemerkungsfeld der Bestellung angeben."
+              )
+            ),
+            React.createElement('label',{style:{
+              display:"flex",alignItems:"flex-start",gap:10,cursor:"pointer",fontSize:12,color:C.bark,lineHeight:1.6
+            }},
+              React.createElement('input',{
+                type:"checkbox",
+                checked:cartAck,
+                onChange:(e)=>setCartAck(e.target.checked),
+                style:{marginTop:3,accentColor:C.sand,flexShrink:0}
+              }),
+              React.createElement('span',null,
+                "Ich habe die Hinweise gelesen und verstanden, dass es je nach Stoffbreite, Reißverschlussart und rutschfestem Boden zu sichtbaren oder technischen Abweichungen bei der Ausführung kommen kann."
+              )
+            )
+          ),
+          React.createElement('button',{
+            onClick:cartLoading?null:handleAddToCart,
+            disabled:cartLoading||!cartAck,
+            style:{width:"100%",marginTop:"1rem",background:cartLoading?"rgba(165,106,67,.25)":C.sand,
+              color:C.chalk,border:"none",padding:"18px 32px",fontSize:15,fontWeight:600,
+              cursor:(cartLoading||!cartAck)?"not-allowed":"pointer",
+              opacity:cartAck?1:.6,
+              letterSpacing:"0.04em",
+              borderRadius:8,
+              display:"flex",alignItems:"center",justifyContent:"center",gap:10}},
+            cartLoading
+              ? React.createElement('span',null,"⏳ Wird hinzugefügt...")
+              : React.createElement(React.Fragment,null,
+                  React.createElement('span',null,"🛒"),
+                  "In den Warenkorb"
+                )
+          ),
+          null
+        );
+      }
+
+      default: return null;
+    }
+  };
+
+  return React.createElement('div',{style:{display:"flex",flexDirection:isMobile?"column":"row",alignItems:isMobile?"stretch":"flex-start",minHeight:"100vh",height:"auto",background:"transparent",color:C.bark,overflow:"visible"}},
+    // Main content
+    React.createElement('div',{ref:mainContentRef,style:{flex:1,padding:isMobile?"1.5rem 1.2rem 2rem":"3rem 4.5rem 4.5rem",overflow:"visible",minWidth:0}},
+      success
+        ? React.createElement('div',{style:{textAlign:"center",padding:"5rem 2rem",maxWidth:500,margin:"0 auto"}},
+            React.createElement('div',{style:{width:64,height:64,borderRadius:"50%",
+              background:"rgba(96,112,99,.15)",border:"2px solid "+C.moss,
+              display:"flex",alignItems:"center",justifyContent:"center",
+              fontSize:28,margin:"0 auto 1.5rem"}},"✓"),
+            React.createElement('h2',{style:{fontFamily:"Wix Madefor Text, Wix Madefor Display, sans-serif",fontWeight:700,letterSpacing:"-0.03em",
+              fontSize:"2.2rem",color:C.bark,marginBottom:"0.8rem"}},"Maßanfertigung hinzugefügt"),
+            React.createElement('p',{style:{color:C.mid,fontSize:14,lineHeight:1.8,marginBottom:"2rem"}},
+              "Deine Konfiguration wurde erfolgreich an den Warenkorb übergeben."),
+            React.createElement('button',{
+              onClick:()=>{setSuccess(false);setStep(0);setFormId("29");setDims({});
+                setFabric(null);setFoamKey("none");setExtras({rz:true});setCartAck(false);setOrder({});},
+              style:{background:C.sand,color:C.chalk,padding:"12px 32px",border:"none",
+                cursor:"pointer",fontSize:13,letterSpacing:"0.02em",borderRadius:2}},
+              "Neue LP-Konfiguration starten"
+            )
+          )
+        : React.createElement('div',null,
+            React.createElement(HeroPanel,{isMobile}),
+            // Step indicator
+            React.createElement('div',{style:{display:"flex",gap:isMobile?4:8,marginBottom:isMobile?"1.5rem":"2.5rem",flexWrap:"wrap"}},
+              STEPS.map((s,i)=>React.createElement('div',{key:s,
+                onClick:()=>i<step&&go(i),
+                style:{display:"flex",alignItems:"center",gap:6,cursor:i<step?"pointer":"default",
+                  opacity:i>step?0.35:1}},
+                React.createElement('div',{style:{width:22,height:22,borderRadius:"50%",
+                  background:i===step?C.sand:i<step?"rgba(165,106,67,.18)":"transparent",
+                  border:`1.5px solid ${i<=step?C.sand:"rgba(0,0,0,.1)"}`,
+                  display:"flex",alignItems:"center",justifyContent:"center",
+                  fontSize:10,fontWeight:700,color:i===step?C.chalk:i<step?C.sand:C.mid,
+                  flexShrink:0}},i<step?"✓":i+1),
+                React.createElement('span',{style:{fontSize:11,letterSpacing:"0.08em",textTransform:"uppercase",
+                  color:i===step?C.bark:C.mid,whiteSpace:"nowrap"}},s),
+                i<STEPS.length-1&&React.createElement('div',{style:{width:16,height:1,background:"rgba(0,0,0,.08)",marginLeft:2}})
+              ))
+            ),
+            renderStep(),
+            React.createElement('div',{style:{display:"flex",justifyContent:"space-between",marginTop:"2rem",gap:12}},
+              step>0&&React.createElement('button',{onClick:()=>go(step-1),
+                style:{background:"transparent",border:"1px solid rgba(26,26,26,.14)",color:C.bark,
+                  padding:"10px 24px",cursor:"pointer",fontSize:13,letterSpacing:"0.02em",borderRadius:2}},
+                "← Zurück"),
+              step<5
+                ?React.createElement('button',{onClick:()=>canNext[step]&&go(step+1),disabled:!canNext[step],
+                    style:{background:canNext[step]?C.sand:"rgba(165,106,67,.25)",color:C.chalk,
+                      padding:"11px 28px",border:"none",cursor:canNext[step]?"pointer":"not-allowed",
+                      fontSize:13,letterSpacing:"0.02em",borderRadius:2,marginLeft:"auto"}},
+                    "Weiter →")
+                :null
+            )
+          )
+    ),
+
+    // Sidebar
+    React.createElement('div',{style:{width:isMobile?"100%":380,background:C.chalk,position:isMobile?"relative":"sticky",top:isMobile?0:24,
+      alignSelf:isMobile?"stretch":"flex-start",maxHeight:isMobile?"none":"calc(100vh - 48px)",overflowY:isMobile?"visible":"auto",padding:isMobile?"1.5rem 1.2rem":"2rem 2rem",display:"flex",flexDirection:"column",
+      gap:"1rem",flexShrink:0,borderLeft:isMobile?"none":"1px solid rgba(0,0,0,.05)",boxShadow:isMobile?"none":"0 10px 26px rgba(0,0,0,.03)"}},
+      React.createElement('div',{style:{fontSize:10,letterSpacing:"0.2em",textTransform:"uppercase",
+        color:C.sand,marginBottom:"0.5rem",fontWeight:700}},"LP-Polster Überblick"),
+      React.createElement('div',{style:{display:"flex",alignItems:"center",gap:12,
+        padding:"1rem",background:"#FFFFFF",marginBottom:"0.5rem",borderRadius:8,border:"1px solid rgba(0,0,0,.05)"}},
+        React.createElement(FormPreview,{formId,size:160,style:{opacity:.9},className:"sidebar-form-preview"}),
+        React.createElement('div',null,
+          React.createElement('div',{style:{fontSize:12,color:C.bark,marginTop:2,fontWeight:500}},cf.label)
+        )
+      ),
+      React.createElement('div',{style:{height:1,background:"rgba(0,0,0,.08)"}},),
+      React.createElement('div',{style:{display:"flex",flexDirection:"column",gap:6}},
+        [["Bezugsstoff",fab?`${fab.n} (${fmt(fab.p)}/lm)`:"–"],
+         ["Füllung",foam.name],
+         ["Extras",Object.entries(extras).filter(([k,v])=>v&&k!=="rz").map(([k])=>EXTRAS.find(e=>e.id===k)?.label).filter(Boolean).join(", ")||"–"]
+        ].map(([k,v])=>React.createElement('div',{key:k,style:{display:"flex",justifyContent:"space-between",gap:8}},
+          React.createElement('span',{style:{fontSize:11,color:C.mid,flexShrink:0}},k),
+          React.createElement('span',{style:{fontSize:11,color:C.bark,textAlign:"right"}},v)
+        ))
+      ),
+      React.createElement('div',{style:{height:1,background:"rgba(0,0,0,.08)"}},),
+      React.createElement('div',{style:{display:"flex",flexDirection:"column",gap:4}},
+        [["Bezugsstoff",prices.fabric],["Schaumstoff",prices.foam],
+         ["Wattierung",prices.wadding],["Jersey",prices.jersey],["Extras",prices.extras]
+        ].filter(([,v])=>v>0).map(([k,v])=>React.createElement('div',{key:k,
+          style:{display:"flex",justifyContent:"space-between"}},
+          React.createElement('span',{style:{fontSize:11,color:C.mid}},k),
+          React.createElement('span',{style:{fontSize:11,color:C.bark}},fmt(v))
+        ))
+      ),
+      prices.total>0&&React.createElement('div',{style:{height:1,background:"rgba(0,0,0,.08)"}},),
+      React.createElement('div',{style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},
+        React.createElement('span',{style:{fontSize:11,color:C.mid}},"Versand"),
+        React.createElement('span',{style:{fontSize:11,color:shipping===0?C.moss:C.bark}},
+          prices.total===0?"–":shipping===0?"Kostenlos ✓":fmt(shipping))
+      ),
+      React.createElement('div',{style:{height:1,background:"rgba(0,0,0,.08)"}},),
+      React.createElement('div',{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline"}},
+        React.createElement('span',{style:{fontSize:11,letterSpacing:"0.12em",textTransform:"uppercase",
+          color:C.mid}},"Gesamt"),
+        React.createElement('span',{style:{fontSize:24,fontWeight:700,color:prices.total>0?C.sand:C.mid,
+          fontFamily:"Wix Madefor Text, Wix Madefor Display, sans-serif",letterSpacing:"-0.03em"}},prices.total>0?fmt(prices.total+shipping):"–")
+      ),
+      React.createElement('div',{style:{marginTop:"auto",display:"flex",flexDirection:"column",gap:4}},
+        ["Maßarbeit in eigener Fertigung","Versandfrei ab 89 €","Stoffmuster auf Anfrage","Für Van, Boot, Garten & Zuhause"].map(t=>
+          React.createElement('div',{key:t,style:{fontSize:10,color:C.mid,
+            display:"flex",alignItems:"center",gap:5}},
+            React.createElement('span',{style:{color:C.sand2,flexShrink:0}},"✓"),t
+          )
+        )
+      )
+    )
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
+</script>
+</body>
+</html>
+
