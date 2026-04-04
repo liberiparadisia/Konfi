@@ -965,6 +965,7 @@ function App() {
           `🧵 Bezugsstoff: ${fab ? fab.n+" ("+fab.p.toFixed(2)+"€/lm)" : "–"}`,
           `🟦 Schaumstoff: ${foam.name}${foam.density>0?" ("+foam.density+" kg/m³)":""}`,
           `➕ Extras: ${extraLabels.length>0?extraLabels.join(", "):"–"}`,
+          order.note?.trim()?`📝 Kundenhinweis: ${order.note.trim()}`:"",
           ``,
           `💶 Bezugsstoff: ${prices.fabric>0?fmt(prices.fabric):"–"}`,
           `💶 Schaumstoff: ${prices.foam>0?fmt(prices.foam):"–"}`,
@@ -982,6 +983,7 @@ function App() {
             form:cf.label,formId,dims,
             fabric:fab?{id:fabric,name:fab.n,price:fab.p}:null,
             foam:{id:foamKey,name:foam.name,density:foam.density},
+            note:order.note?.trim() || "",
             extras:extraLabels,prices,
             total:Math.round((prices.total+shipping)*100)/100,
             shipping,beschreibung,
@@ -1066,6 +1068,27 @@ function App() {
               ),
               React.createElement('div',{style:{fontSize:10,color:C.mid,marginTop:3}},"inkl. 19% MwSt. zzgl. Versand")
             )
+          ),
+          React.createElement('div',{style:{
+            background:"#FFFFFF",border:"1px solid rgba(0,0,0,.08)",borderRadius:8,
+            padding:"1rem 1rem 0.95rem",marginBottom:"1rem"
+          }},
+            React.createElement('div',{style:{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.sand,marginBottom:"0.6rem"}},"Individuelle Hinweise"),
+            React.createElement('div',{style:{fontSize:12,color:C.mid,lineHeight:1.6,marginBottom:"0.75rem"}},
+              "Hier kann der Kunde besondere Wünsche, Einbausituationen oder Zusatzinfos angeben."
+            ),
+            React.createElement('textarea',{
+              value:order.note || "",
+              onChange:(e)=>setOrder(current => ({...current, note:e.target.value})),
+              placeholder:"Zum Beispiel: Reißverschluss bitte hinten, Einsatz im Wohnmobil, besondere Ausrichtung oder sonstige Hinweise.",
+              rows:5,
+              style:{
+                width:"100%",resize:"vertical",minHeight:120,background:"#FFFFFF",
+                border:"1px solid rgba(0,0,0,.12)",borderRadius:8,padding:"12px 14px",
+                fontSize:14,color:C.bark,outline:"none",fontFamily:"Wix Madefor Text, Wix Madefor Display, sans-serif",
+                lineHeight:1.6
+              }
+            })
           ),
           cartError&&React.createElement('div',{style:{background:"rgba(180,60,60,.1)",
             border:"1px solid rgba(180,60,60,.3)",padding:"1rem",marginBottom:"1rem",
