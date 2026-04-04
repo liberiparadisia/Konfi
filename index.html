@@ -143,9 +143,37 @@ const FORM_IMAGES = window.FORM_IMAGES || {};
 const MIN_FABRIC_PRICE = 41;
 const FABRIC_BASE_DISCOUNT = 4;
 const FOLDABLE_FORM_SURCHARGE = 20;
+const FABRIC_AVERAGE_PRICE_MULTIPLIER = 2.322;
+const FABRIC_TARGET_PRICES = {
+  calima: 31.26,
+  luma: 30.41,
+  fresh: 29.67,
+  milo: 29.76,
+  lex: 28.94,
+  sleep: 33.30,
+  soleo: 34.66,
+  agora: 35.12,
+};
+const FABRIC_EXCLUDED_MULTIPLIER_KEYS = new Set(["silvertex"]);
+const getFabricSeriesKey = (fabric) => (
+  ((fabric?.n || "").trim().split(/\s+/)[0] || "")
+    .toLocaleLowerCase("de-DE")
+    .normalize("NFKD")
+    .replace(/[^\p{L}\p{N}]+/gu, "")
+);
 const FABRICS = (window.FABRIC_DATA || []).map(fabric => ({
   ...fabric,
-  p: Math.max(0, Number(fabric?.p || 0) - FABRIC_BASE_DISCOUNT),
+  p: (() => {
+    const seriesKey = getFabricSeriesKey(fabric);
+    const discountedBasePrice = Math.max(0, Number(fabric?.p || 0) - FABRIC_BASE_DISCOUNT);
+    if (Object.prototype.hasOwnProperty.call(FABRIC_TARGET_PRICES, seriesKey)) {
+      return FABRIC_TARGET_PRICES[seriesKey];
+    }
+    if (!FABRIC_EXCLUDED_MULTIPLIER_KEYS.has(seriesKey)) {
+      return Math.round(discountedBasePrice * FABRIC_AVERAGE_PRICE_MULTIPLIER * 100) / 100;
+    }
+    return discountedBasePrice;
+  })(),
 }));
 const FORM_IMAGE_BASE_URL = (window.FORM_IMAGE_BASE_URL || "https://liberiparadisia.github.io/Konfi/forms").replace(/\/+$/,"");
 const FABRIC_IMAGE_BASE_URL = (window.FABRIC_IMAGE_BASE_URL || "https://liberiparadisia.github.io/Konfi/fabrics").replace(/\/+$/,"");
@@ -279,13 +307,13 @@ const FABRIC_CATEGORY_OPTIONS = (() => {
 
 const EXTRAS = [
   {id:"rz",  label:"Reißverschluss",        icon:"🔐",desc:"Abnehmbarer Bezug – inklusive.",          perM2:false,price:0},
-  {id:"watt",label:"Wattierung",             icon:"☁️", desc:"Weichere Optik durch Watteschicht.",    perM2:true, price:8},
-  {id:"trik",label:"Trikotierung (Jersey)",  icon:"🧤",desc:"Schützende Jerseyschicht um den Kern.", perM2:true, price:4},
+  {id:"watt",label:"Wattierung",             icon:"☁️", desc:"Weichere Optik durch Watteschicht.",    perM2:true, price:5},
+  {id:"trik",label:"Trikotierung (Jersey)",  icon:"🧤",desc:"Schützende Jerseyschicht um den Kern.", perM2:true, price:2},
   {id:"anti",label:"Anti-Rutsch Unterseite", icon:"🛑",desc:"Ideal für glatte Stühle und Bänke.",    perM2:true, price:3},
 ];
 
 const STEPS = ["Form","Maße","Stoff","Schaum","Extras","Warenkorb"];
-const FOAM_PRICE_PER_KG = 22;
+const FOAM_PRICE_PER_KG = 27.2;
 const LP_AREAS = ["Van & Camp","Yacht & Boot","Garten","Zuhause"];
 const LP_PROMISES = [
   {title:"Maßanfertigung nach Wunsch", text:"Jedes Polster wird passend zu deinen Maßen und deinem Einsatzbereich gefertigt."},
@@ -627,8 +655,8 @@ function App() {
     const fabricRaw = fab ? Math.round(surface*fab.p*100)/100 : 0;
     const fabricCost = fabricRaw>0 ? Math.max(MIN_FABRIC_PRICE, fabricRaw) : 0;
     const foamCost = foam.density>0 ? Math.round(cf.foamFactor*FOAM_PRICE_PER_KG*foam.density*volume*100)/100 : 0;
-    const jerseyCost  = extras.trik ? Math.round(4*surface*100)/100 : 0;
-    const waddingCost = extras.watt ? Math.round(8*surface*100)/100 : 0;
+    const jerseyCost  = extras.trik ? Math.round(2*surface*100)/100 : 0;
+    const waddingCost = extras.watt ? Math.round(5*surface*100)/100 : 0;
     const formSurcharge = (cf.id==="9" || cf.id==="22") ? FOLDABLE_FORM_SURCHARGE : 0;
     const otherExtras = EXTRAS
       .filter(e=>e.id!=="watt"&&e.id!=="trik"&&extras[e.id])
