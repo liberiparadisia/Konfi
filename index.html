@@ -142,7 +142,7 @@ const FORMS = [
 const FORM_IMAGES = window.FORM_IMAGES || {};
 const MIN_FABRIC_PRICE = 41;
 const FABRIC_BASE_DISCOUNT = 4;
-const FOLDABLE_FORM_SURCHARGE = 80;
+const FOLDABLE_FORM_SURCHARGE = 20;
 const FABRIC_AVERAGE_PRICE_MULTIPLIER = 2.322;
 const FABRIC_TARGET_PRICES = {
   calima: 31.26,
@@ -314,6 +314,16 @@ const EXTRAS = [
 
 const STEPS = ["Form","Maße","Stoff","Schaum","Extras","Warenkorb"];
 const FOAM_PRICE_PER_KG = 27.2;
+const PILLOW_SIZES = [
+  { id:"40x40", label:"40 × 40 cm", width:40, height:40 },
+  { id:"50x50", label:"50 × 50 cm", width:50, height:50 },
+  { id:"60x60", label:"60 × 60 cm", width:60, height:60 },
+  { id:"40x80", label:"40 × 80 cm", width:40, height:80 },
+  { id:"60x80", label:"60 × 80 cm", width:60, height:80 },
+];
+const PILLOW_REFERENCE_FABRIC_PRICE = 31.26;
+const PILLOW_REFERENCE_SIZE_AREA = 0.32;
+const PILLOW_REFERENCE_PRICE = 20;
 const LP_AREAS = ["Van & Camp","Yacht & Boot","Garten","Zuhause"];
 const LP_PROMISES = [
   {title:"Maßanfertigung nach Wunsch", text:"Jedes Polster wird passend zu deinen Maßen und deinem Einsatzbereich gefertigt."},
@@ -342,6 +352,22 @@ const SH = ({n,title,sub}) => (
     React.createElement('p',{style:{fontSize:15,color:C.mid,lineHeight:1.7,maxWidth:640}},sub)
   )
 );
+
+const PillowIcon = ({width, height}) => {
+  const isWide = width > height;
+  return React.createElement('img',{
+    src:"Kissen-Vektor.webp",
+    alt:"",
+    ariaHidden:"true",
+    style:{
+      display:"block",
+      width:isWide?92:68,
+      height:isWide?58:68,
+      objectFit:"contain",
+      margin:"0 auto"
+    }
+  });
+};
 
 const HeroPanel = ({isMobile}) => (
   React.createElement('section',{style:{
@@ -590,6 +616,7 @@ function App() {
   const [fabric,     setFabric]    = useState(null);
   const [fabFilter,  setFabFilter] = useState("calima");
   const [extras,     setExtras]    = useState({rz:true});
+  const [pillows,    setPillows]   = useState(()=>Object.fromEntries(PILLOW_SIZES.map(size => [size.id, 0])));
   const [cartAck,    setCartAck]   = useState(false);
   const [success,    setSuccess]   = useState(false);
   const [order,      setOrder]     = useState({fn:"",ln:"",email:"",phone:"",addr:"",pay:"",note:""});
@@ -649,9 +676,33 @@ function App() {
     }
   },[hasFoam, extras.watt, extras.trik]);
 
+  const pillowSummary = useMemo(() => {
+    if (!fab) return { total:0, items:[], count:0 };
+
+    const items = PILLOW_SIZES.map((size) => {
+      const qty = Number(pillows[size.id] || 0);
+      if (!qty) return null;
+      const area = 2 * ((size.width / 100) * (size.height / 100));
+      const unitPrice = Math.round(
+        PILLOW_REFERENCE_PRICE *
+        (area / PILLOW_REFERENCE_SIZE_AREA) *
+        (fab.p / PILLOW_REFERENCE_FABRIC_PRICE) *
+        100
+      ) / 100;
+      const total = Math.round(unitPrice * qty * 100) / 100;
+      return { ...size, qty, unitPrice, total };
+    }).filter(Boolean);
+
+    return {
+      total: Math.round(items.reduce((sum, item) => sum + item.total, 0) * 100) / 100,
+      count: items.reduce((sum, item) => sum + item.qty, 0),
+      items,
+    };
+  }, [fab, pillows]);
+
   const prices = useMemo(()=>{
     const { surface, volume } = calculateMetrics(cf, dims);
-    if(!surface||!volume) return {fabric:0,foam:0,jersey:0,wadding:0,extras:0,total:0,surface:0,volume:0};
+    if(!surface||!volume) return {fabric:0,foam:0,jersey:0,wadding:0,pillows:0,extras:0,total:0,surface:0,volume:0};
     const fabricRaw = fab ? Math.round(surface*fab.p*100)/100 : 0;
     const fabricCost = fabricRaw>0 ? Math.max(MIN_FABRIC_PRICE, fabricRaw) : 0;
     const foamCost = foam.density>0 ? Math.round(cf.foamFactor*FOAM_PRICE_PER_KG*foam.density*volume*100)/100 : 0;
@@ -661,12 +712,12 @@ function App() {
     const otherExtras = EXTRAS
       .filter(e=>e.id!=="watt"&&e.id!=="trik"&&extras[e.id])
       .reduce((s,e)=>s+(e.perM2 ? Math.round(e.price*surface*100)/100 : e.price),0);
-    const total = fabricCost+foamCost+jerseyCost+waddingCost+otherExtras+formSurcharge;
+    const total = fabricCost+foamCost+jerseyCost+waddingCost+otherExtras+formSurcharge+pillowSummary.total;
     return {fabric:fabricCost,foam:foamCost,jersey:jerseyCost,wadding:waddingCost,formSurcharge,
-      extras:otherExtras,total:Math.round(total*100)/100,
+      extras:otherExtras,pillows:pillowSummary.total,total:Math.round(total*100)/100,
       surface:Math.round(surface*1000)/1000,
       volume:Math.round(volume*1000000)/10};
-  },[dims.a,dims.b,dims.c,dims.d,dims.e,fab,foamKey,extras,cf]);
+  },[dims.a,dims.b,dims.c,dims.d,dims.e,fab,foamKey,extras,cf,pillowSummary.total]);
 
   const shipping = prices.total>0 ? (prices.total>=89?0:4.50) : 0;
   const dimsOK = cf.sides.every(k=>(dims[k]||"")&&parseFloat(dims[k])>0);
@@ -749,14 +800,14 @@ function App() {
         React.createElement('div',{style:{display:"grid",gridTemplateColumns:isMobile?"repeat(2,minmax(0,1fr))":"repeat(3,minmax(0,1fr))",gap:isMobile?12:16,
           background:"transparent",marginBottom:"1.5rem",borderRadius:4,overflow:"visible"}},
           FORMS.map(f=>React.createElement('div',{key:f.id,
-            onClick:()=>{setFormId(f.id);setDims({});},
-            style:{background:formId===f.id?C.linen2:C.chalk,padding:isMobile?"1rem .7rem":"1.35rem 1rem",
-              minHeight:isMobile?null:190,
+            onClick:()=>{setFormId(f.id);setDims({});setStep(1);},
+            style:{background:formId===f.id?C.linen2:C.chalk,padding:isMobile?"1.1rem .8rem":"1.5rem 1rem",
+              minHeight:isMobile?null:220,
               cursor:"pointer",textAlign:"center",transition:"all .2s",position:"relative",
               border:`2px solid ${formId===f.id?C.sand:"transparent"}`}},
             formId===f.id&&React.createElement('div',{style:{position:"absolute",top:4,right:6,
               fontSize:10,color:C.sand,fontWeight:700}},"✓"),
-            React.createElement(FormPreview,{formId:f.id,size:isMobile?100:132,style:{display:"block",margin:"0 auto 12px"}}),
+            React.createElement(FormPreview,{formId:f.id,size:isMobile?124:164,style:{display:"block",margin:"0 auto 14px"}}),
             React.createElement('div',{style:{fontSize:isMobile?10:11,fontWeight:500,color:C.bark,lineHeight:1.4}},f.label)
           ))
         ),
@@ -993,6 +1044,7 @@ function App() {
           .filter(([,v])=>v)
           .map(([k])=>EXTRAS.find(e=>e.id===k)?.label)
           .filter(Boolean);
+        const pillowLabels = pillowSummary.items.map(item => `${item.label} × ${item.qty}`);
         const dimText = cf.sides
           .map(k=>dims[k]?`${k.toUpperCase()} = ${dims[k]} cm`:"")
           .filter(Boolean).join("\n");
@@ -1002,12 +1054,14 @@ function App() {
           `🧵 Bezugsstoff: ${fab ? fab.n+" ("+fab.p.toFixed(2)+"€/lm)" : "–"}`,
           `🟦 Schaumstoff: ${foam.name}${foam.density>0?" ("+foam.density+" kg/m³)":""}`,
           `➕ Extras: ${extraLabels.length>0?extraLabels.join(", "):"–"}`,
+          `🛋 Kissen: ${pillowLabels.length>0?pillowLabels.join(", "):"–"}`,
           order.note?.trim()?`📝 Kundenhinweis: ${order.note.trim()}`:"",
           ``,
           `💶 Bezugsstoff: ${prices.fabric>0?fmt(prices.fabric):"–"}`,
           `💶 Schaumstoff: ${prices.foam>0?fmt(prices.foam):"–"}`,
           prices.wadding>0?`💶 Wattierung: ${fmt(prices.wadding)}`:"",
           prices.jersey>0?`💶 Jersey: ${fmt(prices.jersey)}`:"",
+          prices.pillows>0?`💶 Kissen: ${fmt(prices.pillows)}`:"",
           prices.extras>0?`💶 Extras: ${fmt(prices.extras)}`:"",
           `🚚 Versand: ${shipping===0?"Kostenlos":fmt(shipping)}`,
           `💰 Gesamt: ${fmt(prices.total+shipping)}`,
@@ -1021,6 +1075,7 @@ function App() {
             fabric:fab?{id:fabric,name:fab.n,price:fab.p}:null,
             foam:{id:foamKey,name:foam.name,density:foam.density},
             note:order.note?.trim() || "",
+            pillows:pillowSummary.items.map(item => ({ size:item.label, quantity:item.qty, unitPrice:item.unitPrice, total:item.total })),
             extras:extraLabels,prices,
             total:Math.round((prices.total+shipping)*100)/100,
             shipping,beschreibung,
@@ -1081,11 +1136,63 @@ function App() {
                 ))
               )
             ),
+            React.createElement('div',{style:{padding:"1rem 1.4rem",borderBottom:"1px solid rgba(0,0,0,.08)"}} ,
+              React.createElement('div',{style:{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.sand,marginBottom:"0.8rem"}},"Kissen im passenden Stoff"),
+              React.createElement('div',{style:{display:"grid",gridTemplateColumns:isMobile?"1fr":"repeat(5,minmax(0,1fr))",gap:10}},
+                PILLOW_SIZES.map(size => {
+                  const qty = Number(pillows[size.id] || 0);
+                  const area = 2 * ((size.width / 100) * (size.height / 100));
+                  const unitPrice = fab ? Math.round(
+                    PILLOW_REFERENCE_PRICE *
+                    (area / PILLOW_REFERENCE_SIZE_AREA) *
+                    (fab.p / PILLOW_REFERENCE_FABRIC_PRICE) *
+                    100
+                  ) / 100 : 0;
+                  const lineTotal = Math.round(unitPrice * qty * 100) / 100;
+                  return React.createElement('div',{key:size.id,style:{
+                    border:"1px solid rgba(0,0,0,.08)",borderRadius:10,padding:"0.8rem 0.75rem",
+                    background:qty>0?"rgba(165,106,67,.06)":"#FFFFFF",display:"flex",flexDirection:"column",gap:10
+                  }},
+                    React.createElement('div',{style:{
+                      minHeight:68,display:"flex",alignItems:"center",justifyContent:"center",
+                      background:"linear-gradient(180deg, rgba(165,106,67,.05), rgba(165,106,67,.01))",
+                      borderRadius:8
+                    }},
+                      React.createElement(PillowIcon,{width:size.width,height:size.height})
+                    ),
+                    React.createElement('div',null,
+                      React.createElement('div',{style:{fontSize:13,fontWeight:700,color:C.bark,marginBottom:2}},size.label),
+                      React.createElement('div',{style:{fontSize:11,color:C.mid}},fab ? `${fmt(unitPrice)} / Stück` : "Stoff wählen")
+                    ),
+                    React.createElement('div',{style:{
+                      display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,
+                      border:"1px solid rgba(0,0,0,.08)",borderRadius:999,padding:"4px"
+                    }},
+                      React.createElement('button',{
+                        onClick:()=>setPillows(current => ({...current,[size.id]:Math.max(0, Number(current[size.id] || 0) - 1)})),
+                        style:{width:30,height:30,border:"none",borderRadius:"50%",background:"rgba(49,68,58,.08)",cursor:"pointer",fontSize:18,color:C.bark}
+                      },"-"),
+                      React.createElement('span',{style:{fontSize:15,fontWeight:700,color:C.bark,minWidth:20,textAlign:"center"}},qty),
+                      React.createElement('button',{
+                        onClick:()=>setPillows(current => ({...current,[size.id]:Number(current[size.id] || 0) + 1})),
+                        style:{width:30,height:30,border:"none",borderRadius:"50%",background:C.bark2,cursor:"pointer",fontSize:18,color:C.chalk}
+                      },"+")
+                    ),
+                    React.createElement('div',{style:{fontSize:11,color:qty>0?C.sand:C.mid,fontWeight:qty>0?700:500}},
+                      qty>0 ? `Summe ${fmt(lineTotal)}` : "Optional"
+                    )
+                  );
+                })
+              ),
+              React.createElement('div',{style:{fontSize:12,color:C.mid,lineHeight:1.6,marginTop:"0.85rem"}},
+                "Die Kissen werden automatisch mit dem bereits gewählten Bezugsstoff berechnet."
+              )
+            ),
             React.createElement('div',{style:{padding:"1rem 1.4rem"}},
               React.createElement('div',{style:{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.sand,marginBottom:"0.8rem"}},"Preisübersicht"),
               React.createElement('div',{style:{display:"flex",flexDirection:"column",gap:4}},
                 [["Bezugsstoff",prices.fabric],["Schaumstoff",prices.foam],
-                 ["Wattierung",prices.wadding],["Jersey",prices.jersey],["Extras",prices.extras]
+                 ["Wattierung",prices.wadding],["Jersey",prices.jersey],["Kissen",prices.pillows],["Extras",prices.extras]
                 ].filter(([,v])=>v>0).map(([k,v])=>
                   React.createElement('div',{key:k,style:{display:"flex",justifyContent:"space-between"}},
                     React.createElement('span',{style:{fontSize:12,color:C.mid}},k),
@@ -1229,7 +1336,7 @@ function App() {
               "Deine Konfiguration wurde erfolgreich an den Warenkorb übergeben."),
             React.createElement('button',{
               onClick:()=>{setSuccess(false);setStep(0);setFormId("29");setDims({});
-                setFabric(null);setFoamKey("none");setExtras({rz:true});setCartAck(false);setOrder({});},
+                setFabric(null);setFoamKey("none");setExtras({rz:true});setPillows(Object.fromEntries(PILLOW_SIZES.map(size => [size.id, 0])));setCartAck(false);setOrder({});},
               style:{background:C.sand,color:C.chalk,padding:"12px 32px",border:"none",
                 cursor:"pointer",fontSize:13,letterSpacing:"0.02em",borderRadius:2}},
               "Neue LP-Konfiguration starten"
@@ -1288,6 +1395,7 @@ function App() {
       React.createElement('div',{style:{display:"flex",flexDirection:"column",gap:6}},
         [["Bezugsstoff",fab?`${fab.n} (${fmt(fab.p)}/lm)`:"–"],
          ["Füllung",foam.name],
+         ["Kissen",pillowSummary.items.length>0?pillowSummary.items.map(item => `${item.label} × ${item.qty}`).join(", "):"–"],
          ["Extras",Object.entries(extras).filter(([k,v])=>v&&k!=="rz").map(([k])=>EXTRAS.find(e=>e.id===k)?.label).filter(Boolean).join(", ")||"–"]
         ].map(([k,v])=>React.createElement('div',{key:k,style:{display:"flex",justifyContent:"space-between",gap:8}},
           React.createElement('span',{style:{fontSize:11,color:C.mid,flexShrink:0}},k),
@@ -1297,7 +1405,7 @@ function App() {
       React.createElement('div',{style:{height:1,background:"rgba(0,0,0,.08)"}},),
       React.createElement('div',{style:{display:"flex",flexDirection:"column",gap:4}},
         [["Bezugsstoff",prices.fabric],["Schaumstoff",prices.foam],
-         ["Wattierung",prices.wadding],["Jersey",prices.jersey],["Extras",prices.extras]
+         ["Wattierung",prices.wadding],["Jersey",prices.jersey],["Kissen",prices.pillows],["Extras",prices.extras]
         ].filter(([,v])=>v>0).map(([k,v])=>React.createElement('div',{key:k,
           style:{display:"flex",justifyContent:"space-between"}},
           React.createElement('span',{style:{fontSize:11,color:C.mid}},k),
