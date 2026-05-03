@@ -218,6 +218,71 @@ const resolveFormImageSrc = async (formId) => (
   resolveFirstWorkingImage(getFormImageCandidates(formId))
 );
 
+const URL_FORM_PARAM = "form";
+const normalizeFormUrlValue = (value) => (
+  (value || "")
+    .toString()
+    .trim()
+    .toLocaleLowerCase("de-DE")
+    .normalize("NFKD")
+    .replace(/[^\p{L}\p{N}]+/gu, "-")
+    .replace(/^-+|-+$/g, "")
+);
+
+const FORM_URL_KEYS = {
+  "29":"rechteck-polster",
+  "9":"klappmatratze-2-teilig",
+  "22":"klappmatratze-3-teilig",
+  "30":"rechteck-mit-schraegabschnitt",
+  "27":"rechteck-mit-kleinem-eckabschnitt",
+  "44":"rechtwinkliges-dreieck",
+  "34":"gleichseitiges-dreieck",
+  "33":"dreieck-mit-abschnitt",
+  "42":"trapez-polster",
+  "37":"fuenfeck-polster",
+  "43":"sechseck-polster",
+  "35":"achteck-polster",
+  "31":"rechteck-mit-2-eckabschnitten",
+  "39":"eckkissen-polster",
+  "36":"l-form-polster",
+  "32":"u-form-polster",
+  "40":"rechteck-mit-eckabschnitt",
+  "41":"rechteck-mit-abschnitt",
+  "45":"rechteck-mit-4-eckabschnitten",
+  "38":"rechteck-mit-2-schraegabschnitten",
+};
+
+const getFormUrlKey = (form) => (
+  FORM_URL_KEYS[form?.id] || normalizeFormUrlValue(form?.label || form?.id || "")
+);
+
+const getInitialFormFromUrl = () => {
+  try {
+    const params = new URLSearchParams(window.location.search || "");
+    const rawValue = params.get(URL_FORM_PARAM) || params.get("Form") || "";
+    const normalizedValue = normalizeFormUrlValue(rawValue);
+    if (!normalizedValue) return null;
+    return FORMS.find(form => (
+      form.id === rawValue ||
+      form.id === normalizedValue ||
+      getFormUrlKey(form) === normalizedValue ||
+      normalizeFormUrlValue(form.label) === normalizedValue
+    )) || null;
+  } catch (e) {
+    return null;
+  }
+};
+
+const syncFormUrl = (formId) => {
+  try {
+    const form = FORMS.find(entry => entry.id === formId);
+    if (!form || !window.history?.replaceState) return;
+    const url = new URL(window.location.href);
+    url.searchParams.set(URL_FORM_PARAM, getFormUrlKey(form));
+    window.history.replaceState({}, "", url.toString());
+  } catch (e) {}
+};
+
 const calculateMetrics = (form, dims) => {
   const a = parseFloat(dims.a || 0) / 100;
   const b = parseFloat(dims.b || 0) / 100;
@@ -606,11 +671,12 @@ const FabricLightbox = ({fabric, onClose}) => {
 };
 
 function App() {
+  const initialForm = getInitialFormFromUrl();
   const [isMobile,   setIsMobile]  = useState(()=>{ try{ return window.innerWidth<=768; }catch(e){ return false; } });
   const [cartError,  setCartError]  = useState(null);
   const [cartLoading,setCartLoading]= useState(false);
-  const [step,       setStep]      = useState(0);
-  const [formId,     setFormId]    = useState("29");
+  const [step,       setStep]      = useState(initialForm ? 1 : 0);
+  const [formId,     setFormId]    = useState(initialForm?.id || "29");
   const [dims,       setDims]      = useState({});
   const [foamKey,    setFoamKey]   = useState("none");
   const [fabric,     setFabric]    = useState(null);
@@ -723,6 +789,10 @@ function App() {
   const dimsOK = cf.sides.every(k=>(dims[k]||"")&&parseFloat(dims[k])>0);
   const canNext = [true,dimsOK,!!fabric,true,true,true];
   const go=n=>{if(n>=0&&n<=5)setStep(n);};
+
+  useEffect(()=>{
+    syncFormUrl(formId);
+  },[formId]);
 
   useEffect(()=>{
     const scrollTarget = () => {
@@ -1044,7 +1114,6 @@ function App() {
           .filter(([,v])=>v)
           .map(([k])=>EXTRAS.find(e=>e.id===k)?.label)
           .filter(Boolean);
-        const pillowLabels = pillowSummary.items.map(item => `${item.label} × ${item.qty}`);
         const dimText = cf.sides
           .map(k=>dims[k]?`${k.toUpperCase()} = ${dims[k]} cm`:"")
           .filter(Boolean).join("\n");
@@ -1054,7 +1123,6 @@ function App() {
           `🧵 Bezugsstoff: ${fab ? fab.n+" ("+fab.p.toFixed(2)+"€/lm)" : "–"}`,
           `🟦 Schaumstoff: ${foam.name}${foam.density>0?" ("+foam.density+" kg/m³)":""}`,
           `➕ Extras: ${extraLabels.length>0?extraLabels.join(", "):"–"}`,
-          `🛋 Kissen: ${pillowLabels.length>0?pillowLabels.join(", "):"–"}`,
           order.note?.trim()?`📝 Kundenhinweis: ${order.note.trim()}`:"",
           ``,
           `💶 Bezugsstoff: ${prices.fabric>0?fmt(prices.fabric):"–"}`,
