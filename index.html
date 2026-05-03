@@ -256,18 +256,22 @@ const getFormUrlKey = (form) => (
   FORM_URL_KEYS[form?.id] || normalizeFormUrlValue(form?.label || form?.id || "")
 );
 
+const getFormByUrlValue = (rawValue) => {
+  const normalizedValue = normalizeFormUrlValue(rawValue);
+  if (!normalizedValue) return null;
+  return FORMS.find(form => (
+    form.id === rawValue ||
+    form.id === normalizedValue ||
+    getFormUrlKey(form) === normalizedValue ||
+    normalizeFormUrlValue(form.label) === normalizedValue
+  )) || null;
+};
+
 const getInitialFormFromUrl = () => {
   try {
     const params = new URLSearchParams(window.location.search || "");
     const rawValue = params.get(URL_FORM_PARAM) || params.get("Form") || "";
-    const normalizedValue = normalizeFormUrlValue(rawValue);
-    if (!normalizedValue) return null;
-    return FORMS.find(form => (
-      form.id === rawValue ||
-      form.id === normalizedValue ||
-      getFormUrlKey(form) === normalizedValue ||
-      normalizeFormUrlValue(form.label) === normalizedValue
-    )) || null;
+    return getFormByUrlValue(rawValue);
   } catch (e) {
     return null;
   }
@@ -695,14 +699,23 @@ function App() {
     return ()=>window.removeEventListener('resize',handler);
   },[]);
 
-  useEffect(()=>{
-    const handler = (event)=>{
-      let msg;
-      try { msg = typeof event.data==="string"?JSON.parse(event.data):event.data; } catch(e){ return; }
-      if(msg?.type==="POLSTER24_CART_SUCCESS"){
-        setCartLoading(false);setCartError(null);setSuccess(true);
-        try {
-          window.scrollTo({ top: 0, behavior: "smooth" });
+    useEffect(()=>{
+      const handler = (event)=>{
+        let msg;
+        try { msg = typeof event.data==="string"?JSON.parse(event.data):event.data; } catch(e){ return; }
+        if(msg?.type==="POLSTER24_INIT_FORM"){
+          const targetForm = getFormByUrlValue(msg.form);
+          if(targetForm){
+            setFormId(targetForm.id);
+            setDims({});
+            setStep(1);
+          }
+          return;
+        }
+        if(msg?.type==="POLSTER24_CART_SUCCESS"){
+          setCartLoading(false);setCartError(null);setSuccess(true);
+          try {
+            window.scrollTo({ top: 0, behavior: "smooth" });
         } catch (e) {
           window.scrollTo(0, 0);
         }
