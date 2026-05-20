@@ -102,10 +102,10 @@ const fmt = n => n.toFixed(2).replace(".",",") + " €";
 const FOAM_TYPES = {
   "none":      {name:"Kein Schaumstoff",         density:0 },
   "pur_18_20": {name:"PUR 18/20 – sehr weich",   density:18},
-  "pur_22_40": {name:"PUR 22/40 – mittelweich",  density:22},
-  "pur_30_48": {name:"PUR 30/48 – fest",         density:30},
+  "pur_22_40": {name:"PUR 25/40 – mittelweich",  density:22},
+  "pur_30_48": {name:"PUR 35/50 – fest",         density:30},
   "pur_40_70": {name:"PUR 40/70 – sehr fest",    density:40},
-  "hr_30_40":  {name:"HR Kaltschaum 30/40 H2",   density:30},
+  "hr_30_40":  {name:"HR Kaltschaum 40/30 H2",   density:30},
   "hr_40_40":  {name:"HR Kaltschaum 40/40 H3",   density:40},
   "hr_45_50":  {name:"HR Kaltschaum 45/50 H4",   density:45},
 };
@@ -153,6 +153,7 @@ const FABRIC_TARGET_PRICES = {
   sleep: 33.30,
   soleo: 34.66,
   agora: 35.12,
+  silvertex: 80,
 };
 const FABRIC_EXCLUDED_MULTIPLIER_KEYS = new Set(["silvertex"]);
 const getFabricSeriesKey = (fabric) => (
@@ -747,6 +748,7 @@ function App() {
   const cf   = FORMS.find(f=>f.id===formId)||FORMS[0];
   const foam = FOAM_TYPES[foamKey];
   const fab  = FABRICS.find(f=>f.id===fabric);
+  const formDescription = `Maßgefertigtes ${cf.label} Polster für individuelle Projekte im Innen-, Outdoor-, Van- oder Bootsausbau. Passend nach deinen Vorgaben gefertigt und auf den gewählten Einsatzbereich abgestimmt.`;
   const hasFoam = foamKey !== "none";
 
   useEffect(()=>{
@@ -798,7 +800,7 @@ function App() {
       volume:Math.round(volume*1000000)/10};
   },[dims.a,dims.b,dims.c,dims.d,dims.e,fab,foamKey,extras,cf,pillowSummary.total]);
 
-  const shipping = prices.total>0 ? (prices.total>=89?0:4.50) : 0;
+  const shipping = prices.total>0 ? (prices.total>=89?0:9.99) : 0;
   const dimsOK = cf.sides.every(k=>(dims[k]||"")&&parseFloat(dims[k])>0);
   const canNext = [true,dimsOK,!!fabric,true,true,true];
   const go=n=>{if(n>=0&&n<=5)setStep(n);};
@@ -1132,6 +1134,7 @@ function App() {
           .filter(Boolean).join("\n");
         const beschreibung = [
           `📐 Form: ${cf.label}`,
+          `🪡 Produktbeschreibung: ${formDescription}`,
           `📏 Maße:\n${dimText}`,
           `🧵 Bezugsstoff: ${fab ? fab.n+" ("+fab.p.toFixed(2)+"€/lm)" : "–"}`,
           `🟦 Schaumstoff: ${foam.name}${foam.density>0?" ("+foam.density+" kg/m³)":""}`,
@@ -1173,10 +1176,10 @@ function App() {
           React.createElement('div',{style:{background:C.chalk,border:"1px solid rgba(0,0,0,.06)",marginBottom:"1.5rem",borderRadius:8,boxShadow:"0 10px 26px rgba(0,0,0,.03)",overflow:"hidden"}},
             React.createElement('div',{style:{padding:"1.2rem 1.4rem",borderBottom:"1px solid rgba(0,0,0,.08)"}},
               React.createElement('div',{style:{fontSize:10,letterSpacing:"0.15em",textTransform:"uppercase",color:C.sand,marginBottom:"0.8rem"}},"Form & Maße"),
-              React.createElement('div',{style:{display:"flex",alignItems:"center",gap:"1.5rem"}},
-                React.createElement(FormPreview,{formId,size:80,style:{flexShrink:0}}),
-                React.createElement('div',null,
-                  React.createElement('div',{style:{fontSize:14,fontWeight:500,color:C.bark,marginBottom:6}},cf.label),
+              React.createElement('div',null,
+                React.createElement('div',{style:{fontSize:14,fontWeight:500,color:C.bark,marginBottom:10}},cf.label),
+                React.createElement('div',{style:{display:"flex",flexDirection:"column",alignItems:"flex-start",gap:"0.9rem"}},
+                  React.createElement(FormPreview,{formId,size:80,style:{flexShrink:0}}),
                   React.createElement('div',{style:{display:"flex",flexWrap:"wrap",gap:6}},
                     cf.sides.map(k=>dims[k]&&React.createElement('span',{key:k,
                       style:{background:"rgba(165,106,67,.1)",padding:"3px 8px",fontSize:12,color:C.bark,borderRadius:2}},
@@ -1467,10 +1470,31 @@ function App() {
         color:C.sand,marginBottom:"0.5rem",fontWeight:700}},"LP-Polster Überblick"),
       React.createElement('div',{style:{display:"flex",alignItems:"center",gap:12,
         padding:"1rem",background:"#FFFFFF",marginBottom:"0.5rem",borderRadius:8,border:"1px solid rgba(0,0,0,.05)"}},
-        React.createElement(FormPreview,{formId,size:160,style:{opacity:.9},className:"sidebar-form-preview"}),
-        React.createElement('div',null,
-          React.createElement('div',{style:{fontSize:12,color:C.bark,marginTop:2,fontWeight:500}},cf.label)
-        )
+          React.createElement('div',{style:{width:"100%"}} ,
+            React.createElement('div',{style:{fontSize:12,color:C.bark,marginTop:2,fontWeight:500,marginBottom:10}},cf.label),
+            React.createElement(FormPreview,{formId,size:160,style:{opacity:.9},className:"sidebar-form-preview"})
+          )
+        ),
+      React.createElement('div',{style:{
+        padding:"0.9rem 1rem",
+        background:"#FFFFFF",
+        marginBottom:"0.5rem",
+        borderRadius:8,
+        border:"1px solid rgba(0,0,0,.05)"
+      }},
+        React.createElement('div',{style:{
+          fontSize:10,
+          letterSpacing:"0.12em",
+          textTransform:"uppercase",
+          color:C.sand,
+          marginBottom:"0.45rem",
+          fontWeight:700
+        }},"Produktbeschreibung"),
+        React.createElement('div',{style:{
+          fontSize:11,
+          color:C.mid,
+          lineHeight:1.6
+        }},formDescription)
       ),
       React.createElement('div',{style:{height:1,background:"rgba(0,0,0,.08)"}},),
       React.createElement('div',{style:{display:"flex",flexDirection:"column",gap:6}},
@@ -1494,18 +1518,18 @@ function App() {
         ))
       ),
       prices.total>0&&React.createElement('div',{style:{height:1,background:"rgba(0,0,0,.08)"}},),
-      React.createElement('div',{style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},
-        React.createElement('span',{style:{fontSize:11,color:C.mid}},"Versand"),
-        React.createElement('span',{style:{fontSize:11,color:shipping===0?C.moss:C.bark}},
-          prices.total===0?"–":shipping===0?"Kostenlos ✓":fmt(shipping))
-      ),
-      React.createElement('div',{style:{height:1,background:"rgba(0,0,0,.08)"}},),
-      React.createElement('div',{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline"}},
-        React.createElement('span',{style:{fontSize:11,letterSpacing:"0.12em",textTransform:"uppercase",
-          color:C.mid}},"Gesamt"),
-        React.createElement('span',{style:{fontSize:24,fontWeight:700,color:prices.total>0?C.sand:C.mid,
-          fontFamily:"Wix Madefor Text, Wix Madefor Display, sans-serif",letterSpacing:"-0.03em"}},prices.total>0?fmt(prices.total+shipping):"–")
-      ),
+        React.createElement('div',{style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},
+          React.createElement('span',{style:{fontSize:11,color:C.mid}},"Versand"),
+          React.createElement('span',{style:{fontSize:11,color:shipping===0?C.moss:C.bark}},
+            prices.total===0?"–":shipping===0?"Kostenlos ✓":fmt(shipping))
+        ),
+        React.createElement('div',{style:{height:1,background:"rgba(0,0,0,.08)"}},),
+        React.createElement('div',{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline"}},
+          React.createElement('span',{style:{fontSize:11,letterSpacing:"0.12em",textTransform:"uppercase",
+            color:C.mid}},"Gesamt"),
+          React.createElement('span',{style:{fontSize:24,fontWeight:700,color:prices.total>0?C.sand:C.mid,
+            fontFamily:"Wix Madefor Text, Wix Madefor Display, sans-serif",letterSpacing:"-0.03em"}},prices.total>0?fmt(prices.total+shipping):"ab 41,00 €")
+        ),
       React.createElement('div',{style:{marginTop:"auto",display:"flex",flexDirection:"column",gap:4}},
         ["Maßarbeit in eigener Fertigung","Versandfrei ab 89 €","Stoffmuster auf Anfrage","Für Van, Boot, Garten & Zuhause"].map(t=>
           React.createElement('div',{key:t,style:{fontSize:10,color:C.mid,
