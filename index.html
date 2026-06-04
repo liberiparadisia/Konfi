@@ -220,6 +220,7 @@ const resolveFormImageSrc = async (formId) => (
 );
 
 const URL_FORM_PARAM = "form";
+const URL_CATEGORY_PARAM = "category";
 const normalizeFormUrlValue = (value) => (
   (value || "")
     .toString()
@@ -229,6 +230,18 @@ const normalizeFormUrlValue = (value) => (
     .replace(/[^\p{L}\p{N}]+/gu, "-")
     .replace(/^-+|-+$/g, "")
 );
+const USE_CASE_CATEGORIES = [
+  { key:"outdoor",     label:"Outdoor",     phrase:"für den Outdoor-Bereich",               summary:"Outdoor" },
+  { key:"garten",      label:"Garten",      phrase:"für Garten und Terrasse",               summary:"Garten" },
+  { key:"wohnwagen",   label:"Wohnwagen",   phrase:"für den Wohnwagen-Ausbau",              summary:"Wohnwagen" },
+  { key:"wohnmobile",  label:"Wohnmobile",  phrase:"für den Wohnmobil-Ausbau",              summary:"Wohnmobile" },
+  { key:"van-camper",  label:"Van & Camper",phrase:"für den Van- und Camper-Ausbau",        summary:"Van & Camper" },
+  { key:"boot",        label:"Boot",        phrase:"für den Bootsausbau",                   summary:"Boot" },
+  { key:"yacht",       label:"Yacht",       phrase:"für den Yacht-Ausbau",                  summary:"Yacht" },
+  { key:"maritim",     label:"Maritim",     phrase:"für den maritimen Einsatzbereich",      summary:"Maritim" },
+  { key:"zuhause",     label:"Zuhause",     phrase:"für den Wohn- und Innenbereich",        summary:"Zuhause" },
+];
+const normalizeCategoryUrlValue = normalizeFormUrlValue;
 
 const FORM_URL_KEYS = {
   "29":"rechteck-polster",
@@ -278,12 +291,34 @@ const getInitialFormFromUrl = () => {
   }
 };
 
-const syncFormUrl = (formId) => {
+const getUseCaseByUrlValue = (rawValue) => {
+  const normalizedValue = normalizeCategoryUrlValue(rawValue);
+  if (!normalizedValue) return null;
+  return USE_CASE_CATEGORIES.find(entry => (
+    entry.key === rawValue ||
+    entry.key === normalizedValue ||
+    normalizeCategoryUrlValue(entry.label) === normalizedValue
+  )) || null;
+};
+
+const getInitialUseCaseFromUrl = () => {
+  try {
+    const params = new URLSearchParams(window.location.search || "");
+    const rawValue = params.get(URL_CATEGORY_PARAM) || params.get("Category") || "";
+    return getUseCaseByUrlValue(rawValue);
+  } catch (e) {
+    return null;
+  }
+};
+
+const syncFormUrl = (formId, useCaseKey) => {
   try {
     const form = FORMS.find(entry => entry.id === formId);
     if (!form || !window.history?.replaceState) return;
     const url = new URL(window.location.href);
     url.searchParams.set(URL_FORM_PARAM, getFormUrlKey(form));
+    if (useCaseKey) url.searchParams.set(URL_CATEGORY_PARAM, useCaseKey);
+    else url.searchParams.delete(URL_CATEGORY_PARAM);
     window.history.replaceState({}, "", url.toString());
   } catch (e) {}
 };
@@ -677,11 +712,13 @@ const FabricLightbox = ({fabric, onClose}) => {
 
 function App() {
   const initialForm = getInitialFormFromUrl();
+  const initialUseCase = getInitialUseCaseFromUrl();
   const [isMobile,   setIsMobile]  = useState(()=>{ try{ return window.innerWidth<=768; }catch(e){ return false; } });
   const [cartError,  setCartError]  = useState(null);
   const [cartLoading,setCartLoading]= useState(false);
   const [step,       setStep]      = useState(initialForm ? 1 : 0);
   const [formId,     setFormId]    = useState(initialForm?.id || "29");
+  const [useCaseKey, setUseCaseKey]= useState(initialUseCase?.key || "");
   const [dims,       setDims]      = useState({});
   const [foamKey,    setFoamKey]   = useState("none");
   const [fabric,     setFabric]    = useState(null);
@@ -706,10 +743,14 @@ function App() {
         try { msg = typeof event.data==="string"?JSON.parse(event.data):event.data; } catch(e){ return; }
         if(msg?.type==="POLSTER24_INIT_FORM"){
           const targetForm = getFormByUrlValue(msg.form);
+          const targetUseCase = getUseCaseByUrlValue(msg.category);
           if(targetForm){
             setFormId(targetForm.id);
             setDims({});
             setStep(1);
+          }
+          if(targetUseCase){
+            setUseCaseKey(targetUseCase.key);
           }
           return;
         }
@@ -748,7 +789,10 @@ function App() {
   const cf   = FORMS.find(f=>f.id===formId)||FORMS[0];
   const foam = FOAM_TYPES[foamKey];
   const fab  = FABRICS.find(f=>f.id===fabric);
-  const formDescription = `Maßgefertigtes ${cf.label} Polster für individuelle Projekte im Innen-, Outdoor-, Van- oder Bootsausbau. Passend nach deinen Vorgaben gefertigt und auf den gewählten Einsatzbereich abgestimmt.`;
+  const activeUseCase = USE_CASE_CATEGORIES.find(entry => entry.key === useCaseKey) || null;
+  const formDescription = activeUseCase
+    ? `Maßgefertigtes ${cf.label} Polster ${activeUseCase.phrase}. Passend nach deinen Vorgaben gefertigt und auf diesen Einsatzbereich abgestimmt.`
+    : `Maßgefertigtes ${cf.label} Polster für individuelle Projekte im Innen-, Outdoor-, Van- oder Bootsausbau. Passend nach deinen Vorgaben gefertigt und auf den gewählten Einsatzbereich abgestimmt.`;
   const hasFoam = foamKey !== "none";
 
   useEffect(()=>{
@@ -806,8 +850,8 @@ function App() {
   const go=n=>{if(n>=0&&n<=5)setStep(n);};
 
   useEffect(()=>{
-    syncFormUrl(formId);
-  },[formId]);
+    syncFormUrl(formId, useCaseKey);
+  },[formId, useCaseKey]);
 
   useEffect(()=>{
     const scrollTarget = () => {
@@ -1499,6 +1543,7 @@ function App() {
       React.createElement('div',{style:{height:1,background:"rgba(0,0,0,.08)"}},),
       React.createElement('div',{style:{display:"flex",flexDirection:"column",gap:6}},
         [["Bezugsstoff",fab?`${fab.n} (${fmt(fab.p)}/lm)`:"–"],
+         ["Kategorie",activeUseCase ? activeUseCase.summary : "–"],
          ["Füllung",foam.name],
          ["Kissen",pillowSummary.items.length>0?pillowSummary.items.map(item => `${item.label} × ${item.qty}`).join(", "):"–"],
          ["Extras",Object.entries(extras).filter(([k,v])=>v&&k!=="rz").map(([k])=>EXTRAS.find(e=>e.id===k)?.label).filter(Boolean).join(", ")||"–"]
