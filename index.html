@@ -324,6 +324,16 @@ const syncFormUrl = (formId, useCaseKey) => {
   } catch (e) {}
 };
 
+const clearFormUrlState = () => {
+  try {
+    if (!window.history?.replaceState) return;
+    const url = new URL(window.location.href);
+    url.searchParams.delete(URL_FORM_PARAM);
+    url.searchParams.delete(URL_CATEGORY_PARAM);
+    window.history.replaceState({}, "", url.toString());
+  } catch (e) {}
+};
+
 const calculateMetrics = (form, dims) => {
   const a = parseFloat(dims.a || 0) / 100;
   const b = parseFloat(dims.b || 0) / 100;
@@ -866,8 +876,12 @@ function App() {
   const go=n=>{if(n>=0&&n<=5)setStep(n);};
 
   useEffect(()=>{
-    syncFormUrl(formId, useCaseKey);
-  },[formId, useCaseKey]);
+    if (step > 0) {
+      syncFormUrl(formId, useCaseKey);
+    } else {
+      clearFormUrlState();
+    }
+  },[formId, useCaseKey, step]);
 
   useEffect(()=>{
     const applyUrlState = () => {
