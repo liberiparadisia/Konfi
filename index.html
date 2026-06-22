@@ -870,6 +870,35 @@ function App() {
   },[formId, useCaseKey]);
 
   useEffect(()=>{
+    const applyUrlState = () => {
+      const targetForm = getInitialFormFromUrl();
+      const targetUseCase = getInitialUseCaseFromUrl();
+
+      if (targetUseCase && targetUseCase.key !== useCaseKey) {
+        setUseCaseKey(targetUseCase.key);
+      }
+
+      if (targetForm) {
+        if (targetForm.id !== formId) {
+          setFormId(targetForm.id);
+          setDims({});
+        }
+        if (step === 0) {
+          setStep(1);
+        }
+      }
+    };
+
+    applyUrlState();
+    window.addEventListener("popstate", applyUrlState);
+    window.addEventListener("hashchange", applyUrlState);
+    return () => {
+      window.removeEventListener("popstate", applyUrlState);
+      window.removeEventListener("hashchange", applyUrlState);
+    };
+  },[formId, useCaseKey, step]);
+
+  useEffect(()=>{
     const scrollTarget = () => {
       const el = mainContentRef.current;
       if (el && typeof el.scrollIntoView === "function") {
