@@ -961,8 +961,13 @@ function App() {
 
       case 1: {
         return React.createElement('div',null,
-          React.createElement(SH,{n:2,
-            title:React.createElement('span',null,"Polster nach Maß ",React.createElement('em',{style:{color:C.sand,fontStyle:"italic"}},cf.label),"."),
+        React.createElement(SH,{n:2,
+          title:React.createElement('span',null,
+            "Polster nach Maß ",
+            activeUseCase ? React.createElement('span',null,activeUseCase.label," ") : null,
+            React.createElement('em',{style:{color:C.sand,fontStyle:"italic"}},cf.label),
+            "."
+          ),
             sub:"Alle Maße in cm angeben. A = Dicke des Polsters."}),
           React.createElement('div',{style:{background:C.chalk,border:"1px dashed rgba(165,106,67,.22)",
             padding:"1.5rem",display:"flex",flexDirection:"column",alignItems:"center",
