@@ -870,7 +870,6 @@ function App() {
       volume:Math.round(volume*1000000)/10};
   },[dims.a,dims.b,dims.c,dims.d,dims.e,fab,foamKey,extras,cf,pillowSummary.total]);
 
-  const shipping = prices.total>0 ? (prices.total>=89?0:9.99) : 0;
   const dimsOK = cf.sides.every(k=>(dims[k]||"")&&parseFloat(dims[k])>0);
   const canNext = [true,dimsOK,!!fabric,true,true,true];
   const go=n=>{if(n>=0&&n<=5)setStep(n);};
@@ -1255,8 +1254,7 @@ function App() {
           prices.jersey>0?`💶 Jersey: ${fmt(prices.jersey)}`:"",
           prices.pillows>0?`💶 Kissen: ${fmt(prices.pillows)}`:"",
           prices.extras>0?`💶 Extras: ${fmt(prices.extras)}`:"",
-          `🚚 Versand: ${shipping===0?"Kostenlos":fmt(shipping)}`,
-          `💰 Gesamt: ${fmt(prices.total+shipping)}`,
+          `💰 Gesamt: ${fmt(prices.total)}`,
         ].filter(l=>l!=="").join("\n");
 
         const handleAddToCart = async () => {
@@ -1273,8 +1271,8 @@ function App() {
             note:order.note?.trim() || "",
             pillows:pillowSummary.items.map(item => ({ size:item.label, quantity:item.qty, unitPrice:item.unitPrice, total:item.total })),
             extras:extraLabels,prices,
-            total:Math.round((prices.total+shipping)*100)/100,
-            shipping,beschreibung,
+            total:Math.round(prices.total*100)/100,
+            beschreibung,
             image:resolvedFormImage,
           };
           window.parent.postMessage({type:"POLSTER24_ADD_TO_CART",data:cartData},"*");
@@ -1402,15 +1400,10 @@ function App() {
               ),
               React.createElement('div',{style:{height:1,background:"rgba(0,0,0,.08)",margin:"0.8rem 0"}},),
               React.createElement('div',{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline"}},
-                React.createElement('span',{style:{fontSize:11,color:C.mid}},"Versand"),
-                React.createElement('span',{style:{fontSize:12,color:shipping===0?C.moss:C.bark}},
-                  shipping===0?"Kostenlos ✓":fmt(shipping))
-              ),
-              React.createElement('div',{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginTop:"0.5rem"}},
                 React.createElement('span',{style:{fontSize:13,fontWeight:600,color:C.bark}},"Gesamt"),
-                React.createElement('span',{style:{fontSize:22,fontWeight:700,color:C.sand,fontFamily:"Wix Madefor Text, Wix Madefor Display, sans-serif",letterSpacing:"-0.03em"}},fmt(prices.total+shipping))
+                React.createElement('span',{style:{fontSize:22,fontWeight:700,color:C.sand,fontFamily:"Wix Madefor Text, Wix Madefor Display, sans-serif",letterSpacing:"-0.03em"}},fmt(prices.total))
               ),
-              React.createElement('div',{style:{fontSize:10,color:C.mid,marginTop:3}},"inkl. 19% MwSt. zzgl. Versand")
+              React.createElement('div',{style:{fontSize:10,color:C.mid,marginTop:3}},"inkl. 19% MwSt.")
             )
           ),
           React.createElement('div',{style:{
@@ -1635,17 +1628,11 @@ function App() {
         ))
       ),
       prices.total>0&&React.createElement('div',{style:{height:1,background:"rgba(0,0,0,.08)"}},),
-        React.createElement('div',{style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},
-          React.createElement('span',{style:{fontSize:11,color:C.mid}},"Versand"),
-          React.createElement('span',{style:{fontSize:11,color:shipping===0?C.moss:C.bark}},
-            prices.total===0?"–":shipping===0?"Kostenlos ✓":fmt(shipping))
-        ),
-        React.createElement('div',{style:{height:1,background:"rgba(0,0,0,.08)"}},),
         React.createElement('div',{style:{display:"flex",justifyContent:"space-between",alignItems:"baseline"}},
           React.createElement('span',{style:{fontSize:11,letterSpacing:"0.12em",textTransform:"uppercase",
             color:C.mid}},"Gesamt"),
           React.createElement('span',{style:{fontSize:24,fontWeight:700,color:prices.total>0?C.sand:C.mid,
-            fontFamily:"Wix Madefor Text, Wix Madefor Display, sans-serif",letterSpacing:"-0.03em"}},prices.total>0?fmt(prices.total+shipping):"ab 3,00 €")
+            fontFamily:"Wix Madefor Text, Wix Madefor Display, sans-serif",letterSpacing:"-0.03em"}},prices.total>0?fmt(prices.total):"ab 3,00 €")
         ),
       React.createElement('div',{style:{marginTop:"auto",display:"flex",flexDirection:"column",gap:4}},
         ["Maßarbeit in eigener Fertigung","Versandfrei ab 89 €","Stoffmuster auf Anfrage","Für Van, Boot, Garten & Zuhause"].map(t=>
