@@ -258,8 +258,18 @@ window.FABRIC_DATA = [{"id":"calima_1","n":"Calima 1","cat":"indoor","p":15.75,"
   if (initial) setLang(initial);
   window.addEventListener("message", function (ev) {
     var d = ev.data;
+    if (typeof d === "string") { try { d = JSON.parse(d); } catch (e) { return; } }
     if (d && d.type === "SET_LANG" && typeof d.lang === "string") setLang(d.lang.toLowerCase().slice(0, 2));
   });
+
+  /* Der Konfi meldet sich bei der Wix-Seite ("bin geladen"), damit diese ihm die aktuelle
+     Sprache schicken kann (Velo: siehe konf.main Code). Mehrfach, falls Wix noch nicht lauscht. */
+  function announceReady() {
+    try { if (window.parent && window.parent !== window) window.parent.postMessage({ type: "POLSTER24_HTML_READY" }, "*"); } catch (e) {}
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", announceReady); else announceReady();
+  setTimeout(announceReady, 1500);
+  setTimeout(announceReady, 4000);
   window.__setKonfiLang = setLang;
 })();
 
