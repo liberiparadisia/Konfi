@@ -134,7 +134,7 @@ window.KONFI_LANGS.en = {
     "Die Kissen werden automatisch mit dem bereits gewählten Bezugsstoff berechnet.": "The cushions are automatically calculated using the fabric you've already chosen.",
 
     /* Zusammenfassung */
-    "Preisübersicht": "Price overview", "inkl. 19% MwSt.": "incl. 19% VAT",
+    "Preisübersicht": "Price overview",
     "Bezugsstoff": "Fabric", "Schaumstoff": "Foam", "Produktbeschreibung": "Product description",
     "Individuelle Hinweise": "Personal notes",
     "Teile uns hier gern besondere Wünsche oder wichtige Hinweise zu deiner Bestellung mit.": "Feel free to share any special requests or important notes about your order here.",
@@ -159,6 +159,7 @@ window.KONFI_LANGS.en = {
       "I have read and understood that, depending on fabric width, zip type and non-slip base, visible or technical variations in the finished item may occur."
   },
   patterns: [
+    [/^inkl\. (\d+)% MwSt\.$/, function (m, t, lc) { return "incl. " + m[1] + "% VAT"; }],
     [/^Schritt (\d+) von (\d+)$/, function (m, t, lc) { return "Step " + m[1] + " of " + m[2]; }],
     /* Preise im Quelltext stehen fest als "N,NN €" (deutsches Format) — fürs Englische Komma→Punkt und € nach vorne. */
     [/^ab (\d+),(\d\d) €$/, function (m, t, lc) { return "from €" + m[1] + "." + m[2]; }],
@@ -308,7 +309,7 @@ window.KONFI_LANGS.fr = {
     "Die Kissen werden automatisch mit dem bereits gewählten Bezugsstoff berechnet.": "Les coussins sont automatiquement calculés avec le tissu déjà sélectionné.",
 
     /* Zusammenfassung */
-    "Preisübersicht": "Aperçu des prix", "inkl. 19% MwSt.": "TVA 19 % incl.",
+    "Preisübersicht": "Aperçu des prix",
     "Bezugsstoff": "Tissu", "Schaumstoff": "Mousse", "Produktbeschreibung": "Description du produit",
     "Individuelle Hinweise": "Remarques personnalisées",
     "Teile uns hier gern besondere Wünsche oder wichtige Hinweise zu deiner Bestellung mit.": "Indiquez-nous ici vos souhaits particuliers ou remarques importantes concernant votre commande.",
@@ -333,6 +334,7 @@ window.KONFI_LANGS.fr = {
       "J'ai lu et compris les informations selon lesquelles, en fonction de la largeur du tissu, du type de fermeture éclair et du dessous antidérapant, des écarts visibles ou techniques peuvent apparaître dans la réalisation."
   },
   patterns: [
+    [/^inkl\. (\d+)% MwSt\.$/, function (m, t, lc) { return "TVA " + m[1] + " % incl."; }],
     [/^Schritt (\d+) von (\d+)$/, function (m, t, lc) { return "Étape " + m[1] + " sur " + m[2]; }],
     [/^ab (.+)$/, function (m, t, lc) { return "à partir de " + m[1]; }],
     [/^Seite ([A-Z])$/, function (m, t, lc) { return "Côté " + m[1]; }],
@@ -478,7 +480,7 @@ window.KONFI_LANGS.nl = {
     "Die Kissen werden automatisch mit dem bereits gewählten Bezugsstoff berechnet.": "De kussens worden automatisch berekend met de reeds gekozen bekledingsstof.",
 
     /* Zusammenfassung */
-    "Preisübersicht": "Prijsoverzicht", "inkl. 19% MwSt.": "incl. 19% btw",
+    "Preisübersicht": "Prijsoverzicht",
     "Bezugsstoff": "Bekledingsstof", "Schaumstoff": "Schuimrubber", "Produktbeschreibung": "Productomschrijving",
     "Individuelle Hinweise": "Persoonlijke opmerkingen",
     "Teile uns hier gern besondere Wünsche oder wichtige Hinweise zu deiner Bestellung mit.": "Laat hier gerust bijzondere wensen of belangrijke opmerkingen bij je bestelling achter.",
@@ -503,6 +505,7 @@ window.KONFI_LANGS.nl = {
       "Ik heb de informatie gelezen en begrijp dat er afhankelijk van stofbreedte, ritsvariant en antislipbodem zichtbare of technische afwijkingen in de uitvoering kunnen voorkomen."
   },
   patterns: [
+    [/^inkl\. (\d+)% MwSt\.$/, function (m, t, lc) { return "incl. " + m[1] + "% btw"; }],
     [/^Schritt (\d+) von (\d+)$/, function (m, t, lc) { return "Stap " + m[1] + " van " + m[2]; }],
     [/^ab (.+)$/, function (m, t, lc) { return "vanaf " + m[1]; }],
     [/^Seite ([A-Z])$/, function (m, t, lc) { return "Zijde " + m[1]; }],
@@ -777,6 +780,11 @@ const FORMS = [
 ];
 
 const FORM_IMAGES = window.FORM_IMAGES || {};
+/* Alle Preise/Konstanten unten sind mit deutscher MwSt. (19%) kalkuliert.
+   vatMultiplier (siehe App()) skaliert sie je nach aktiver Sprache/Land auf den
+   korrekten Länder-Steuersatz um – siehe i18n/README.txt, Abschnitt MwSt. */
+const BASE_VAT_RATE = 0.19;
+const VAT_RATES = { de: 0.19, nl: 0.21, fr: 0.20, en: 0.19 };
 const MIN_FABRIC_PRICE = 41;
 const FABRIC_BASE_DISCOUNT = 4;
 const FOLDABLE_FORM_SURCHARGE = 20;
@@ -1377,6 +1385,12 @@ function App() {
   const [success,    setSuccess]   = useState(false);
   const [order,      setOrder]     = useState({fn:"",ln:"",email:"",phone:"",addr:"",pay:"",note:""});
   const [expandedFabricId, setExpandedFabricId] = useState(null);
+  const [vatRate, setVatRate] = useState(()=>{
+    try {
+      const l = new URLSearchParams(window.location.search).get("lang");
+      return VAT_RATES[(l||"").toLowerCase().slice(0,2)] ?? BASE_VAT_RATE;
+    } catch(e){ return BASE_VAT_RATE; }
+  });
   const mainContentRef = useRef(null);
   const cartTimeoutRef = useRef(null);
 
@@ -1390,6 +1404,11 @@ function App() {
       const handler = (event)=>{
         let msg;
         try { msg = typeof event.data==="string"?JSON.parse(event.data):event.data; } catch(e){ return; }
+        if(msg?.type==="SET_LANG" && typeof msg.lang==="string"){
+          const l = msg.lang.toLowerCase().slice(0,2);
+          setVatRate(VAT_RATES[l] ?? BASE_VAT_RATE);
+          return;
+        }
         if(msg?.type==="POLSTER24_INIT_FORM"){
           const targetForm = getFormByUrlValue(msg.form);
           const targetUseCase = getUseCaseByUrlValue(msg.category);
@@ -1457,6 +1476,7 @@ function App() {
     ? `Maßgefertigtes ${cf.label} Polster ${activeUseCase.phrase}. Passend nach deinen Vorgaben gefertigt und auf diesen Einsatzbereich abgestimmt.`
     : `Maßgefertigtes ${cf.label} Polster für individuelle Projekte im Innen-, Outdoor-, Van- oder Bootsausbau. Passend nach deinen Vorgaben gefertigt und auf den gewählten Einsatzbereich abgestimmt.`;
   const hasFoam = foamKey !== "none";
+  const vatMultiplier = vatRate / BASE_VAT_RATE;
 
   useEffect(()=>{
     if (!hasFoam && (extras.watt || extras.trik)) {
@@ -1475,6 +1495,7 @@ function App() {
         PILLOW_REFERENCE_PRICE *
         (area / PILLOW_REFERENCE_SIZE_AREA) *
         (fab.p / PILLOW_REFERENCE_FABRIC_PRICE) *
+        vatMultiplier *
         100
       ) / 100;
       const total = Math.round(unitPrice * qty * 100) / 100;
@@ -1486,26 +1507,31 @@ function App() {
       count: items.reduce((sum, item) => sum + item.qty, 0),
       items,
     };
-  }, [fab, pillows]);
+  }, [fab, pillows, vatMultiplier]);
 
   const prices = useMemo(()=>{
     const { surface, volume } = calculateMetrics(cf, dims);
     if(!surface||!volume) return {fabric:0,foam:0,jersey:0,wadding:0,pillows:0,extras:0,total:0,surface:0,volume:0};
     const fabricRaw = fab ? Math.round(surface*fab.p*100)/100 : 0;
-    const fabricCost = fabricRaw>0 ? Math.max(MIN_FABRIC_PRICE, fabricRaw) : 0;
-    const foamCost = foam.density>0 ? Math.round(cf.foamFactor*FOAM_PRICE_PER_KG*foam.density*volume*100)/100 : 0;
-    const jerseyCost  = extras.trik ? Math.round(2*surface*100)/100 : 0;
-    const waddingCost = extras.watt ? Math.round(5*surface*100)/100 : 0;
-    const formSurcharge = (cf.id==="9" || cf.id==="22") ? FOLDABLE_FORM_SURCHARGE : 0;
-    const otherExtras = EXTRAS
+    const fabricBase = fabricRaw>0 ? Math.max(MIN_FABRIC_PRICE, fabricRaw) : 0;
+    const foamBase = foam.density>0 ? Math.round(cf.foamFactor*FOAM_PRICE_PER_KG*foam.density*volume*100)/100 : 0;
+    const jerseyBase  = extras.trik ? Math.round(2*surface*100)/100 : 0;
+    const waddingBase = extras.watt ? Math.round(5*surface*100)/100 : 0;
+    const formSurchargeBase = (cf.id==="9" || cf.id==="22") ? FOLDABLE_FORM_SURCHARGE : 0;
+    const otherExtrasBase = EXTRAS
       .filter(e=>e.id!=="watt"&&e.id!=="trik"&&extras[e.id])
       .reduce((s,e)=>s+(e.perM2 ? Math.round(e.price*surface*100)/100 : e.price),0);
+    /* Basispreise sind mit 19% MwSt. kalkuliert; vatMultiplier rechnet auf den Satz
+       der aktiven Sprache/des Landes um (siehe VAT_RATES oben). */
+    const r2 = n => Math.round(n*vatMultiplier*100)/100;
+    const fabricCost = r2(fabricBase), foamCost = r2(foamBase), jerseyCost = r2(jerseyBase),
+      waddingCost = r2(waddingBase), formSurcharge = r2(formSurchargeBase), otherExtras = r2(otherExtrasBase);
     const total = fabricCost+foamCost+jerseyCost+waddingCost+otherExtras+formSurcharge+pillowSummary.total;
     return {fabric:fabricCost,foam:foamCost,jersey:jerseyCost,wadding:waddingCost,formSurcharge,
       extras:otherExtras,pillows:pillowSummary.total,total:Math.round(total*100)/100,
       surface:Math.round(surface*1000)/1000,
       volume:Math.round(volume*1000000)/10};
-  },[dims.a,dims.b,dims.c,dims.d,dims.e,fab,foamKey,extras,cf,pillowSummary.total]);
+  },[dims.a,dims.b,dims.c,dims.d,dims.e,fab,foamKey,extras,cf,pillowSummary.total,vatMultiplier]);
 
   const dimsOK = cf.sides.every(k=>(dims[k]||"")&&parseFloat(dims[k])>0);
   const canNext = [true,dimsOK,!!fabric,true,true,true];
@@ -1730,7 +1756,7 @@ function App() {
             filtered.map(f=>{
               const on = fabric===f.id;
               const detailsOpen = expandedFabricId===f.id;
-              const fp = prices.surface>0 ? Math.max(MIN_FABRIC_PRICE,Math.round(prices.surface*f.p*100)/100) : null;
+              const fp = prices.surface>0 ? Math.round(Math.max(MIN_FABRIC_PRICE,Math.round(prices.surface*f.p*100)/100)*vatMultiplier*100)/100 : null;
               return React.createElement('div',{key:f.id,
                 style:{background:on?C.linen2:C.chalk,
                   border:`2px solid ${on?C.sand:"transparent"}`,transition:"all .2s"}},
@@ -1741,7 +1767,7 @@ function App() {
                     React.createElement('div',{style:{fontSize:12,fontWeight:on?500:300,color:C.bark,
                       whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}},f.n),
                     React.createElement('div',{style:{fontSize:11,color:C.mid,marginTop:1}},
-                      `${f.p.toFixed(2)} €/lm`)
+                      `${(f.p*vatMultiplier).toFixed(2)} €/lm`)
                   ),
                   fp&&React.createElement('div',{style:{fontSize:12,color:on?C.sand:C.mid,
                     fontWeight:on?600:300,flexShrink:0}},fmt(fp)),
@@ -1763,7 +1789,7 @@ function App() {
                     },f.n),
                     React.createElement('div',{
                       style:{fontSize:11,color:C.mid,marginTop:2}
-                    },`${getFabricCategoryLabel(f)} · ${fmt(Number(f.p || 0))}/lm`)
+                    },`${getFabricCategoryLabel(f)} · ${fmt(Number(f.p || 0)*vatMultiplier)}/lm`)
                   ),
                   React.createElement('div',{style:{marginBottom:"1rem"}},
                     React.createElement(FabricPreview,{fabric:f,size:300})
@@ -1792,7 +1818,7 @@ function App() {
           Object.entries(FOAM_TYPES).map(([key,f])=>{
             const on=foamKey===key;
             const vol = calculateMetrics(cf, dims).volume;
-            const fp=f.density>0&&vol>0?Math.round(cf.foamFactor*FOAM_PRICE_PER_KG*f.density*vol*100)/100:null;
+            const fp=f.density>0&&vol>0?Math.round(cf.foamFactor*FOAM_PRICE_PER_KG*f.density*vol*vatMultiplier*100)/100:null;
             return React.createElement('div',{key,onClick:()=>setFoamKey(key),
               style:{background:on?C.linen2:C.chalk,padding:"0.9rem 1.2rem",cursor:"pointer",
                 border:`2px solid ${on?C.sand:"transparent"}`,transition:"all .2s",
@@ -1861,7 +1887,7 @@ function App() {
                   disabled ? "Nur verfügbar, wenn Schaumstoff ausgewählt ist." : e.desc)
               ),
               React.createElement('div',{style:{fontSize:13,color:active?C.sand:C.mid,fontWeight:active?600:300}},
-                e.price===0?"inkl.":e.perM2?`+${fmt(e.price)}/m²`:`+${fmt(e.price)}`
+                e.price===0?"inkl.":e.perM2?`+${fmt(e.price*vatMultiplier)}/m²`:`+${fmt(e.price*vatMultiplier)}`
               )
             );
           })
@@ -1880,7 +1906,7 @@ function App() {
           `📐 Form: ${cf.label}`,
           `🪡 Produktbeschreibung: ${formDescription}`,
           `📏 Maße:\n${dimText}`,
-          `🧵 Bezugsstoff: ${fab ? fab.n+" ("+fab.p.toFixed(2)+"€/lm)" : "–"}`,
+          `🧵 Bezugsstoff: ${fab ? fab.n+" ("+(fab.p*vatMultiplier).toFixed(2)+"€/lm)" : "–"}`,
           `🟦 Schaumstoff: ${foam.name}${foam.density>0?" ("+foam.density+" kg/m³)":""}`,
           `➕ Extras: ${extraLabels.length>0?extraLabels.join(", "):"–"}`,
           order.note?.trim()?`📝 Kundenhinweis: ${order.note.trim()}`:"",
@@ -1949,7 +1975,7 @@ function App() {
                   React.createElement('span',{style:{fontSize:13,color:C.bark}},fab.n)
                 )
               ),
-              React.createElement('span',{style:{fontSize:13,color:C.sand,fontWeight:500}},`${fab.p.toFixed(2)} €/lm`)
+              React.createElement('span',{style:{fontSize:13,color:C.sand,fontWeight:500}},`${(fab.p*vatMultiplier).toFixed(2)} €/lm`)
             ),
             React.createElement('div',{style:{padding:"1rem 1.4rem",borderBottom:"1px solid rgba(0,0,0,.08)",
               display:"flex",justifyContent:"space-between",alignItems:"center"}},
@@ -1981,6 +2007,7 @@ function App() {
                     PILLOW_REFERENCE_PRICE *
                     (area / PILLOW_REFERENCE_SIZE_AREA) *
                     (fab.p / PILLOW_REFERENCE_FABRIC_PRICE) *
+                    vatMultiplier *
                     100
                   ) / 100 : 0;
                   const lineTotal = Math.round(unitPrice * qty * 100) / 100;
@@ -2040,7 +2067,7 @@ function App() {
                 React.createElement('span',{style:{fontSize:13,fontWeight:600,color:C.bark}},"Gesamt"),
                 React.createElement('span',{style:{fontSize:22,fontWeight:700,color:C.sand,fontFamily:"Wix Madefor Text, Wix Madefor Display, sans-serif",letterSpacing:"-0.03em"}},fmt(prices.total))
               ),
-              React.createElement('div',{style:{fontSize:10,color:C.mid,marginTop:3}},"inkl. 19% MwSt.")
+              React.createElement('div',{style:{fontSize:10,color:C.mid,marginTop:3}},`inkl. ${Math.round(vatRate*100)}% MwSt.`)
             )
           ),
           React.createElement('div',{style:{
@@ -2244,7 +2271,7 @@ function App() {
       ),
       React.createElement('div',{style:{height:1,background:"rgba(0,0,0,.08)"}},),
       React.createElement('div',{style:{display:"flex",flexDirection:"column",gap:6}},
-        [["Bezugsstoff",fab?`${fab.n} (${fmt(fab.p)}/lm)`:"–"],
+        [["Bezugsstoff",fab?`${fab.n} (${fmt(fab.p*vatMultiplier)}/lm)`:"–"],
          ["Kategorie",activeUseCase ? activeUseCase.summary : "–"],
          ["Füllung",foam.name],
          ["Kissen",pillowSummary.items.length>0?pillowSummary.items.map(item => `${item.label} × ${item.qty}`).join(", "):"–"],
